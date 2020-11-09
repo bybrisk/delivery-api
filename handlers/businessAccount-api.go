@@ -16,7 +16,7 @@ func NewAccount(l *log.Logger) *Account{
 	return &Account{l}
 }
 
-func (p *Account) GetAccountDetail(w http.ResponseWriter, r *http.Request) {
+/*func (p *Account) GetAccountDetail(w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> businessAccount-api Module")
 	lp := data.GetData()
 
@@ -24,7 +24,7 @@ func (p *Account) GetAccountDetail(w http.ResponseWriter, r *http.Request) {
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
 	}
-}
+}*/
 
 func (p *Account) AddNewAccount (w http.ResponseWriter, r *http.Request){
 	p.l.Println("Handle POST request -> businessAccount-api Module")
