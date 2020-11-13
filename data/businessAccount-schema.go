@@ -133,7 +133,7 @@ func setProfileConfig (document *structs.ProfileConfig, docID string) int64 {
 func setDeliveryStats (docID string) int64 {
 	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
 	id, _ := primitive.ObjectIDFromHex(docID)
-	update := bson.M{"deliveryPending": "0", "deliveryDelivered":"0"}
+	update := bson.M{"$set":bson.M{"deliveryPending": "0", "deliveryDelivered":"0"}}
 	filter := bson.M{"_id": id}
 	res,err := collectionName.UpdateOne(shashankMongo.CtxForDB,filter, update)
 	if err!=nil{
