@@ -3,7 +3,6 @@ package handlers
 
 import (
 	"net/http"
-	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/bybrisk/businessAccount-api/data"
 )
