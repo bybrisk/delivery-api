@@ -7,7 +7,7 @@ import (
 	"github.com/bybrisk/businessAccount-api/data"
 )
 
-// swagger:route GET /account/{id} businessAccount createBusinessAccount
+// swagger:route GET /account/{id} businessAccount getBusinessAccount
 // Get details of a existing Business Account by ID
 //
 // responses:

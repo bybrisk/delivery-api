@@ -67,9 +67,9 @@ type productParamsWrapper struct {
 	Body data.BusinessAccountRequest
 }
 
-// swagger:parameters updateBusinessAccount
+// swagger:parameters getBusinessAccount
 type productIDParamsWrapper struct {
-	// The id of the Account for which the operation relates
+	// The bybID of the Business Account 
 	// in: path
 	// required: true
 	ID int `json:"id"`
