@@ -11,7 +11,7 @@ import (
 // Create a new Business Account
 //
 // responses:
-//	200: businessAccountResponse
+//	200: businessAccountPostResponse
 //  422: errorValidation
 //  501: errorResponse
 
@@ -31,5 +31,13 @@ func (p *Account) AddNewAccount (w http.ResponseWriter, r *http.Request){
 		http.Error(w,fmt.Sprintf("Error in data validation : %s",err), http.StatusBadRequest)
 		return
 	} 
-	data.AddData(account)
+
+	//create account
+	accountWithID := data.AddData(account)
+
+	//writing to the io.Writer
+	err = accountWithID.ResultToJSON(w)
+	if err!=nil {
+		http.Error(w,"Data with ID failed to marshel",http.StatusInternalServerError)		
+	}
 }

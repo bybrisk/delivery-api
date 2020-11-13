@@ -37,12 +37,12 @@ type errorValidationWrapper struct {
 	Body ValidationError
 }
 
-// Data structure representing a single Business Account
-// swagger:response businessAccountResponse
-type productResponseWrapper struct {
-	// Newly created Business Account
+// Success message on a single Business Account creation
+// swagger:response businessAccountPostResponse
+type accountPostResponseWrapper struct {
+	// Success message on newly created Business Account
 	// in: body
-	Body data.BusinessAccountResponse
+	Body data.BusinessAccountPostSuccess
 }
 
 // No content is returned by this API endpoint

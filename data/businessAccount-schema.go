@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	log "github.com/sirupsen/logrus"
 	"github.com/bybrisk/structs"
+	"go.mongodb.org/mongo-driver/bson"
 	"github.com/shashank404error/shashankMongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -30,7 +31,12 @@ type BusinessAccountResponse struct{
 	DeliveryPending string `json: "deliveryPending"`
 	DeliveryDelivered string `json: "deliveryDelivered"`
 	UserID string `json:"BybID"`
-	ZoneDetailInfo []structs.ZoneInfo `json:"zoneDetailInfo"`
+	ZoneDetailInfo []structs.ZoneInfo `json:"-"`
+}
+
+type BusinessAccountPostSuccess struct {
+	BybID string `json:"bybID"`
+	Message string `json:"message"`
 }
 
 var resultID string
@@ -50,25 +56,34 @@ func (d *BusinessAccountRequest) FromJSON (r io.Reader) error {
 	return e.Decode(d)
 }
 
+func (d *BusinessAccountPostSuccess) ResultToJSON (w io.Writer) error {
+	e := json.NewEncoder(w)
+	return e.Encode(d)
+}
+
 //func GetData () *BusinessAccount {
 	//return &deliveryDetail
 //}
 
-func AddData (d *BusinessAccountRequest) {
+func AddData (d *BusinessAccountRequest) *BusinessAccountPostSuccess{
 	//save data to database and return ID
 	id := createBusinessAccount(d)
-	fmt.Println(id)
-}
 
-/*
-11111111111111111111111111111111111111111111111111111111111111111
-11111000001110111110111000001110000011100000111000001110111011111
-11111011101111011101111011101110111011111011111011111110101111111
-11111000001111101011111000001110000011111011111000001110011111111
-11111011101111110111111011101110101111111011111111101110101111111
-11111000001111110111111000001110111011100000111000001110111011111
-11111111111111111111111111111111111111111111111111111111111111111
-*/
+	//get and set ProfileConfig based on Business Plan
+	res:=getProfileConfig(d)
+	_ = setProfileConfig(res,id)
+
+	//set deliveryPending and deliveryDelivered
+	_ = setDeliveryStats(id)
+
+	//sending response
+	var response = BusinessAccountPostSuccess{
+		BybID: id,
+		Message: "200_OK_SUCCESS",
+	}
+
+	return &response
+}
 
 //Database Funcs
 func createBusinessAccount (account *BusinessAccountRequest) string {
@@ -85,4 +100,46 @@ func createBusinessAccount (account *BusinessAccountRequest) string {
 		resultID = newID.(primitive.ObjectID).Hex()
 	}
 	return resultID
+}
+
+func getProfileConfig (account *BusinessAccountRequest) *structs.ProfileConfig {
+	collectionName := shashankMongo.DatabaseName.Collection("profileConfig")
+	filter := bson.M{"plan": account.BusinessPlan}
+	var document *structs.ProfileConfig
+
+	err:= collectionName.FindOne(shashankMongo.CtxForDB, filter).Decode(&document)
+	if err != nil {
+		log.Error("setProfileConfig ERROR:")
+		log.Error(err)
+	}
+	return document
+}	
+
+func setProfileConfig (document *structs.ProfileConfig, docID string) int64 {
+	//update businessAccount
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	update := bson.M{"profileConfig": document}
+	filter := bson.M{"_id": id}
+	res,err := collectionName.UpdateOne(shashankMongo.CtxForDB,filter, update)
+	if err!=nil{
+		log.Error("UpdateDeliveryInfo ERROR:")
+		log.Error(err)
+		}	
+	
+	return res.ModifiedCount
+}
+
+func setDeliveryStats (docID string) int64 {
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	update := bson.M{"deliveryPending": "0", "deliveryDelivered":"0"}
+	filter := bson.M{"_id": id}
+	res,err := collectionName.UpdateOne(shashankMongo.CtxForDB,filter, update)
+	if err!=nil{
+		log.Error("setDeliveryStats ERROR:")
+		log.Error(err)
+		}	
+	
+	return res.ModifiedCount
 }
