@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
 	log "github.com/sirupsen/logrus"
-	//"github.com/bybrisk/structs"
+	"github.com/bybrisk/structs"
 	"github.com/shashank404error/shashankMongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -18,6 +18,19 @@ type BusinessAccountRequest struct{
 	Password string `json: "password" validate:"required"` //custom requirement
 	City string `json: "city" validate:"required"`
 	BusinessPlan string `json: "businessplan" validate:"required"`
+}
+
+type BusinessAccountResponse struct{
+	PicURL string `json: "picurl"`
+	UserName string `json: "username"`
+	BusinessName string `json: "businessname"`
+	City string `json: "city"`
+	BusinessPlan string `json: "businessplan"`
+	ProfileConfig structs.ProfileConfig `json:"profileConfiguration"`
+	DeliveryPending string `json: "deliveryPending"`
+	DeliveryDelivered string `json: "deliveryDelivered"`
+	UserID string `json:"BybID"`
+	ZoneDetailInfo []structs.ZoneInfo `json:"zoneDetailInfo"`
 }
 
 var resultID string
@@ -44,7 +57,7 @@ func (d *BusinessAccountRequest) FromJSON (r io.Reader) error {
 func AddData (d *BusinessAccountRequest) {
 	//save data to database and return ID
 	id := createBusinessAccount(d)
-	d.BusinessPlan
+	fmt.Println(id)
 }
 
 /*
