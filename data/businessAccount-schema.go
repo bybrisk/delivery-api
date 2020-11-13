@@ -119,7 +119,7 @@ func setProfileConfig (document *structs.ProfileConfig, docID string) int64 {
 	//update businessAccount
 	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
 	id, _ := primitive.ObjectIDFromHex(docID)
-	update := bson.M{"profileConfig": document}
+	update := bson.M{"$set": bson.M{"profileConfig": document}}
 	filter := bson.M{"_id": id}
 	res,err := collectionName.UpdateOne(shashankMongo.CtxForDB,filter, update)
 	if err!=nil{
