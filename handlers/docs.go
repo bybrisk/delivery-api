@@ -37,20 +37,12 @@ type errorValidationWrapper struct {
 	Body ValidationError
 }
 
-// A list of products
-// swagger:response productsResponse
-type productsResponseWrapper struct {
-	// All current products
-	// in: body
-	Body []data.Product
-}
-
-// Data structure representing a single product
-// swagger:response productResponse
+// Data structure representing a single Business Account
+// swagger:response businessAccountResponse
 type productResponseWrapper struct {
-	// Newly created product
+	// Newly created Business Account
 	// in: body
-	Body data.Product
+	Body data.BusinessAccountResponse
 }
 
 // No content is returned by this API endpoint
@@ -58,18 +50,18 @@ type productResponseWrapper struct {
 type noContentResponseWrapper struct {
 }
 
-// swagger:parameters updateProduct createProduct
+// swagger:parameters updateBusinessAccount createBusinessAccount
 type productParamsWrapper struct {
 	// Product data structure to Update or Create.
 	// Note: the id field is ignored by update and create operations
 	// in: body
 	// required: true
-	Body data.Product
+	Body data.BusinessAccountRequest
 }
 
-// swagger:parameters updateProduct
+// swagger:parameters updateBusinessAccount
 type productIDParamsWrapper struct {
-	// The id of the product for which the operation relates
+	// The id of the Account for which the operation relates
 	// in: path
 	// required: true
 	ID int `json:"id"`

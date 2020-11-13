@@ -1,4 +1,4 @@
-module github.com/businessAccount-api/data
+module github.com/bybrisk/businessAccount-api/data
 
 go 1.12
 
