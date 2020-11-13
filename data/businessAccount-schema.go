@@ -12,6 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+//post request
 type BusinessAccountRequest struct{
 	PicURL string `json: "picurl"`
 	UserName string `json: "username" validate:"required"`
@@ -21,6 +22,7 @@ type BusinessAccountRequest struct{
 	BusinessPlan string `json: "businessplan" validate:"required"`
 }
 
+//get response
 type BusinessAccountResponse struct{
 	PicURL string `json: "picurl"`
 	UserName string `json: "username"`
@@ -30,10 +32,10 @@ type BusinessAccountResponse struct{
 	ProfileConfig structs.ProfileConfig `json:"profileConfiguration"`
 	DeliveryPending string `json: "deliveryPending"`
 	DeliveryDelivered string `json: "deliveryDelivered"`
-	UserID string `json:"BybID"`
-	ZoneDetailInfo []structs.ZoneInfo `json:"-"`
+	UserID string `json:"bybID"`
 }
 
+//post response
 type BusinessAccountPostSuccess struct {
 	BybID string `json:"bybID"`
 	Message string `json:"message"`
@@ -46,7 +48,7 @@ func (d *BusinessAccountRequest) Validate() error {
 	return validate.Struct(d)
 }
 
-func (d *BusinessAccountRequest) ToJSON (w io.Writer) error {
+func (d *BusinessAccountResponse) ToJSON (w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
@@ -61,9 +63,10 @@ func (d *BusinessAccountPostSuccess) ResultToJSON (w io.Writer) error {
 	return e.Encode(d)
 }
 
-//func GetData () *BusinessAccount {
-	//return &deliveryDetail
-//}
+func GetData (docID string) *BusinessAccountResponse {
+	account := getBusinessAccount(docID)
+	return account
+}
 
 func AddData (d *BusinessAccountRequest) *BusinessAccountPostSuccess{
 	//save data to database and return ID
@@ -142,4 +145,18 @@ func setDeliveryStats (docID string) int64 {
 		}	
 	
 	return res.ModifiedCount
+}
+
+func getBusinessAccount (docID string) *BusinessAccountResponse {
+	var businessAccount *BusinessAccountResponse
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	filter := bson.M{"_id": id}
+    err:= collectionName.FindOne(shashankMongo.CtxForDB, filter).Decode(&businessAccount)
+	if err != nil {
+		log.Error("getBusinessAccount ERROR:")
+		log.Error(err)
+	}
+
+	return businessAccount
 }

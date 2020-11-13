@@ -37,6 +37,14 @@ type errorValidationWrapper struct {
 	Body ValidationError
 }
 
+// Details of a single Business Account
+// swagger:response businessAccountGetResponse
+type accountGetResponseWrapper struct {
+	// Details of a existing Business Account
+	// in: body
+	Body data.BusinessAccountResponse
+}
+
 // Success message on a single Business Account creation
 // swagger:response businessAccountPostResponse
 type accountPostResponseWrapper struct {

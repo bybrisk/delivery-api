@@ -25,16 +25,6 @@ func NewAccount(l *log.Logger) *Account{
 	return &Account{l}
 }
 
-/*func (p *Account) GetAccountDetail(w http.ResponseWriter, r *http.Request) {
-	p.l.Println("Handle GET request -> businessAccount-api Module")
-	lp := data.GetData()
-
-	err := lp.ToJSON(w)
-	if err!=nil {
-		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
-	}
-}*/
-
 func (p *Account) UpdateAccount (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle PUT request -> businessAccount-api Module")
 	vars := mux.Vars(r)
