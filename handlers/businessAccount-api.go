@@ -1,10 +1,7 @@
 package handlers
 
 import (
-	"net/http"
 	"log"
-	"github.com/gorilla/mux"
-	//"github.com/bybrisk/businessAccount-api/data"
 )
 
 type Account struct {
@@ -23,11 +20,4 @@ type ValidationError struct {
 
 func NewAccount(l *log.Logger) *Account{
 	return &Account{l}
-}
-
-func (p *Account) UpdateAccount (w http.ResponseWriter, r *http.Request) {
-	p.l.Println("Handle PUT request -> businessAccount-api Module")
-	vars := mux.Vars(r)
-	id := vars["id"]
-	p.l.Println("Update businessAccount content with id",id)
 }

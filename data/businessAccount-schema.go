@@ -48,3 +48,8 @@ func (d *BusinessAccountRequest) Validate() error {
 	validate := validator.New()
 	return validate.Struct(d)
 }
+
+func (d *UpdateBusinessAccountRequest) ValidateUpdateRequest() error {
+	validate := validator.New()
+	return validate.Struct(d)
+}

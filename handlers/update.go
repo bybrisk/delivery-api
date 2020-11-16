@@ -25,7 +25,7 @@ func (p *Account) UpdateAccount (w http.ResponseWriter, r *http.Request){
 	}
 
 	//validate the data 
-	err = account.Validate()
+	err = account.ValidateUpdateRequest()
 	if err!=nil {
 		p.l.Println("Validation error in POST request -> businessAccount-api Module \n",err)
 		http.Error(w,fmt.Sprintf("Error in data validation : %s",err), http.StatusBadRequest)
