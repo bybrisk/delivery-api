@@ -1,7 +1,7 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=
-github.com/bybrisk/businessAccount-api/data v0.0.0-20201116134248-95cdc40e9512 h1:ReCzN6f7F12kzl03naeBum6bC8O5cd+E/Tkgo2tcAgo=
-github.com/bybrisk/businessAccount-api/data v0.0.0-20201116134248-95cdc40e9512/go.mod h1:x97eoQJihOAndeMvJnAPZ7FNuwJVlCsdtmVDp4X2gdY=
+github.com/bybrisk/businessAccount-api/data v0.0.0-20201116134403-00d86af9f883 h1:A8OjxTfHXmN9Pq/JkvxtVKOjXdWLScssisDN1vlhdTg=
+github.com/bybrisk/businessAccount-api/data v0.0.0-20201116134403-00d86af9f883/go.mod h1:x97eoQJihOAndeMvJnAPZ7FNuwJVlCsdtmVDp4X2gdY=
 github.com/bybrisk/structs v0.0.0-20201109044720-899a1e012b8c/go.mod h1:+ozPcEcgRTvbDXzFyBlUTgv1G2niBpEsIzF5tySMIck=
 github.com/bybrisk/structs v0.0.0-20201109083406-7db2aa1cd06f h1:2mk2d3QQB8ILGl0JQ6MPJyvk/grZ9nCd78k3hNXSIyM=
 github.com/bybrisk/structs v0.0.0-20201109083406-7db2aa1cd06f/go.mod h1:+ozPcEcgRTvbDXzFyBlUTgv1G2niBpEsIzF5tySMIck=

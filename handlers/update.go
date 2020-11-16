@@ -7,8 +7,8 @@ import (
 	"github.com/bybrisk/businessAccount-api/data"
 )
 
-// swagger:route POST /account businessAccount createBusinessAccount
-// Create a new Business Account
+// swagger:route POST /accountUpdate businessAccount updateBusinessAccount
+// Update an existing Business Account with ID
 //
 // responses:
 //	200: businessAccountPostResponse

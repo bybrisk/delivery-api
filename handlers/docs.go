@@ -58,13 +58,22 @@ type accountPostResponseWrapper struct {
 type noContentResponseWrapper struct {
 }
 
-// swagger:parameters updateBusinessAccount createBusinessAccount
-type productParamsWrapper struct {
-	// Product data structure to Update or Create.
-	// Note: the id field is ignored by update and create operations
+// swagger:parameters createBusinessAccount
+type createAccountParamsWrapper struct {
+	// Product data structure or Create.
+	// Note: the id field is ignored by create operations
 	// in: body
 	// required: true
 	Body data.BusinessAccountRequest
+}
+
+// swagger:parameters updateBusinessAccount
+type updateAccountParamsWrapper struct {
+	// Product data structure to Update.
+	// Note: All the field are required to be sent with the post request along with the updates.
+	// in: body
+	// required: true
+	Body data.UpdateBusinessAccountRequest
 }
 
 // swagger:parameters getBusinessAccount

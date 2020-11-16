@@ -18,11 +18,10 @@ type BusinessAccountRequest struct{
 //update request
 type UpdateBusinessAccountRequest struct{
 	BybID string `json: "bybID" validate:"required"`
-	PicURL string `json: "picurl"`
-	UserName string `json: "username"`
-	BusinessName string `json: "businessname"`
-	Password string `json: "password"` //custom requirement
-	City string `json: "city"`
+	PicURL string `json: "picurl" validate:"required"`
+	UserName string `json: "username" validate:"required"`
+	BusinessName string `json: "businessname" validate:"required"`
+	City string `json: "city" validate:"required"`
 }
 
 //get response
