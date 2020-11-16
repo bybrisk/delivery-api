@@ -88,7 +88,7 @@ func updateBusinessAccount(account *UpdateBusinessAccountRequest) int64 {
 	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
 	id, _ := primitive.ObjectIDFromHex(account.BybID)
 	filter := bson.M{"_id": id}
-	updateResult, err := collectionName.ReplaceOne(shashankMongo.CtxForDB, filter, account)
+	updateResult, err := collectionName.UpdateOne(shashankMongo.CtxForDB, filter, bson.D{{Key: "$set", Value: account}})
 	if err != nil {
 		log.Error("updateBusinessAccount ERROR:")
 		log.Error(err)
