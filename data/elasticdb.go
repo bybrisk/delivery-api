@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
+	"reflect"
 	log "github.com/sirupsen/logrus"
 	elastic "github.com/olivere/elastic/v7"
 )
@@ -28,7 +29,6 @@ func insertDataToElastic(d *AddDeliveryRequest) {
 	//get current date
 	currentTime := time.Now()
 	date:=currentTime.Format("01-02-2006")
-	fmt.Println(date)
 
 	dataJSON, err := json.Marshal(&d)
 	js := string(dataJSON)
@@ -38,7 +38,7 @@ func insertDataToElastic(d *AddDeliveryRequest) {
 		log.Error("insertDataToElastic inserting ERROR : ")
 		log.Error(err)
 	}else{
-		fmt.Println("[Elastic][InsertProduct]Insertion Successful")
 		fmt.Println(ind)
+		fmt.Println(reflect.TypeOf(ind))
 	}
 }
