@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
-	"reflect"
 	log "github.com/sirupsen/logrus"
 	elastic "github.com/olivere/elastic/v7"
 )
@@ -13,12 +12,12 @@ import (
 func GetESClient() (*elastic.Client, error) {
 
 	client, err :=  elastic.NewClient(elastic.SetURL("https://elastic:YqZmasvS43ne95XNNC9ZzkWs@83d2cc8c5e8c4cfc95f00e145d0f9be3.ap-south-1.aws.elastic-cloud.com:9243"),elastic.SetSniff(false),elastic.SetHealthcheck(false))
-	fmt.Println("ElasticSearch initialized...")
 	return client, err
 
 }
 
-func insertDataToElastic(d *AddDeliveryRequest) {
+func insertDataToElastic(d *AddDeliveryRequest) string {
+	var res string
 	ctx := context.Background()
 	esclient, err := GetESClient()
 	if err != nil {
@@ -38,7 +37,8 @@ func insertDataToElastic(d *AddDeliveryRequest) {
 		log.Error("insertDataToElastic inserting ERROR : ")
 		log.Error(err)
 	}else{
-		fmt.Println(ind)
-		fmt.Println(reflect.TypeOf(ind))
+		res=ind.Id
+		fmt.Println("Delivery added to ElasticSearch with ID : ",ind.Id)
 	}
+	return res
 }
