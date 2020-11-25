@@ -1,8 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/aws/aws-sdk-go v1.35.20/go.mod h1:tlPOdRjfxPBpNIwqDj61rmsnA85v9jc0Ps9+muhnW+k=
-github.com/bybrisk/delivery-api/data v0.0.0-20201125105955-92b7fc8b70ed h1:XfRCHdjmkyC96D+hiRpKpKqgeCGt4W3HYa87pj9NDgY=
-github.com/bybrisk/delivery-api/data v0.0.0-20201125105955-92b7fc8b70ed/go.mod h1:MWoiO5xMMxP1uG4yB7nYiNeh8vHlH4rklJhWfRyOFRs=
+github.com/bybrisk/delivery-api/data v0.0.0-20201125111225-accfe0d5c973 h1:GQ0g28vMoTbUtVwzq214XtuHOiMfHyUfguWYnsj3N5w=
+github.com/bybrisk/delivery-api/data v0.0.0-20201125111225-accfe0d5c973/go.mod h1:MWoiO5xMMxP1uG4yB7nYiNeh8vHlH4rklJhWfRyOFRs=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
