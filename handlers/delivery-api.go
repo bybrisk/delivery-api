@@ -4,7 +4,7 @@ import (
 	"log"
 )
 
-type Account struct {
+type Delivery struct {
  l *log.Logger
 }
 
@@ -18,6 +18,6 @@ type ValidationError struct {
 	Messages []string `json:"messages"`
 }
 
-func NewAccount(l *log.Logger) *Account{
-	return &Account{l}
+func NewDelivery(l *log.Logger) *Delivery{
+	return &Delivery{l}
 }
