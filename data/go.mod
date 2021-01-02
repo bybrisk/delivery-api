@@ -1,4 +1,4 @@
-module github.com/delivery-api/data
+module github.com/bybrisk/delivery-api/data
 
 go 1.12
 
