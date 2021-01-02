@@ -10,7 +10,12 @@ func (d *DeliveryPostSuccess) FromAddDeliveryStructToJSON (w io.Writer) error {
 	return e.Encode(d)
 }
 
-func (d *AddDeliveryRequest) FromJSONToAddDeliveryStruct (r io.Reader) error {
+func (d *AddDeliveryRequestWithGeoCode) FromJSONToAddDeliveryStruct (r io.Reader) error {
+	e := json.NewDecoder(r)
+	return e.Decode(d)
+}
+
+func (d *AddDeliveryWithoutGeocodeRequest) FromJSONToAddDeliveryWGStruct (r io.Reader) error {
 	e := json.NewDecoder(r)
 	return e.Decode(d)
 }

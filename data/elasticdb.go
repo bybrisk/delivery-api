@@ -10,13 +10,12 @@ import (
 )
 
 func GetESClient() (*elastic.Client, error) {
-
-	client, err :=  elastic.NewClient(elastic.SetURL("https://elastic:YqZmasvS43ne95XNNC9ZzkWs@83d2cc8c5e8c4cfc95f00e145d0f9be3.ap-south-1.aws.elastic-cloud.com:9243"),elastic.SetSniff(false),elastic.SetHealthcheck(false))
+	client, err :=  elastic.NewClient(elastic.SetURL("https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"),elastic.SetSniff(false),elastic.SetHealthcheck(false))
 	return client, err
 
 }
 
-func insertDataToElastic(d *AddDeliveryRequest) string {
+func InsertDeilveryWithGeoCode(d *AddDeliveryRequestWithGeoCode) string {
 	var res string
 	ctx := context.Background()
 	esclient, err := GetESClient()
