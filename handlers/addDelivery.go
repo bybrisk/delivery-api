@@ -7,7 +7,7 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-// swagger:route POST /addDelivery/wg delivery addDeliveryWithGeocord
+// swagger:route POST /delivery/create delivery addDeliveryWithGeocord
 // Add a delivery for cluster formation.
 //
 // responses:
