@@ -15,7 +15,7 @@ func (d *AddDeliveryRequestWithGeoCode) FromJSONToAddDeliveryStruct (r io.Reader
 	return e.Decode(d)
 }
 
-func (d *AddDeliveryWithoutGeocodeRequest) FromJSONToAddDeliveryWGStruct (r io.Reader) error {
+func (d *AddDeliveryRequestWithoutGeoCode) FromJSONToAddDeliveryStructAdv (r io.Reader) error {
 	e := json.NewDecoder(r)
 	return e.Decode(d)
 }

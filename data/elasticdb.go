@@ -41,3 +41,30 @@ func InsertDeilveryWithGeoCode(d *AddDeliveryRequestWithGeoCode) string {
 	}
 	return res
 }
+
+func InsertDeilveryWithoutGeoCode(d *AddDeliveryRequestWithoutGeoCode) string {
+	var res string
+	ctx := context.Background()
+	esclient, err := GetESClient()
+	if err != nil {
+		log.Error("ElasticSearch initialization ERROR : ")
+		log.Error(err)
+	}
+
+	//get current date
+	currentTime := time.Now()
+	date:=currentTime.Format("01-02-2006")
+
+	dataJSON, err := json.Marshal(&d)
+	js := string(dataJSON)
+	ind, err := esclient.Index().Index(date).BodyJson(js).Do(ctx)
+
+	if err != nil {
+		log.Error("insertDataToElastic inserting ERROR : ")
+		log.Error(err)
+	}else{
+		res=ind.Id
+		fmt.Println("Delivery added to ElasticSearch with ID : ",ind.Id)
+	}
+	return res
+}

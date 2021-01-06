@@ -1,5 +1,12 @@
 package data
 
+import ("log"
+		"fmt"
+		"io/ioutil"
+		"net/http"
+		"net/url"
+		"encoding/json")
+
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
 	//save data to elastic search and return ID
 	res := InsertDeilveryWithGeoCode(d)
@@ -18,18 +25,40 @@ func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSucc
 	return &response
 }
 
-/*func AddDataWithoutGeocode (d *AddDeliveryWithoutGeocodeRequest) *DeliveryPostSuccess {
+func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPostSuccess {
+	apiKey := "AIzaSyAZDoWPn-emuLvzohH3v-cS_En-u9NSA1A"
+	address := url.QueryEscape(d.CustomerAddress)
+	url :=  "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+apiKey
 	//get geocode using address
-	
-	//save data to elastic search and return ID
+	response, err := http.Get(url)
 
-	//update pending deliveries of business account
+    if err != nil {
+        fmt.Print(err.Error())
+    }
+
+    responseData, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+        log.Fatal(err)
+	}
+	var responseObject ResponseFromMapAPI
+	json.Unmarshal(responseData, &responseObject)
+	d.Latitude = responseObject.Results[0].Geometry.Location.Lat
+	d.Longitude = responseObject.Results[0].Geometry.Location.Lng
+	status := responseObject.Status
+	d.APIKey = "API"
+
+	//save data to elastic search and return ID
+	Id := InsertDeilveryWithoutGeoCode(d)
+
+	//Fetch Pending Delivery
+	count:=GetPendingDelivery(d.BybID)
+	//update pending delivery of business account
+	_=UpdatePendingDlivery(d.BybID,count.DeliveryPending)
 
 	//sending response
-	
+	var res = DeliveryPostSuccess{
+		DeliveryID: Id,
+		Message: status,
+	}
+	return &res
 }
-
-func GetDelivery (docID string, dateOfDelivery string) *DeliveryGetResponse{
-	delivery := fetchDataFromIndex(docID,dateOfDelivery)
-	return delivery
-}*/

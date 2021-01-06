@@ -58,3 +58,12 @@ type createAccountParamsWrapper struct {
 	// required: true
 	Body data.AddDeliveryRequestWithGeoCode
 }
+
+// swagger:parameters addDeliveryWithoutGeocords
+type createDeliveryParmsWrapper struct {
+	// Delivery data structure to add delivery without Geocode.
+	// Note: latitude and longitude field will be found using address field
+	// in: body
+	// required: true
+	Body data.AddDeliveryRequestWithoutGeoCode
+}

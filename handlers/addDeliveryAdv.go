@@ -7,25 +7,25 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-// swagger:route POST /delivery/create/al delivery addDeliveryWithGeocords
-// Add a delivery with Geocode for cluster formation.
+// swagger:route POST /delivery/create/be delivery addDeliveryWithoutGeocords
+// Add a delivery without Geocode for cluster formation.
 //
 // responses:
 //	200: deliveryPostResponse
 //  422: errorValidation
 //  501: errorResponse
 
-func (p *Delivery) AddDeliveryGeoCode (w http.ResponseWriter, r *http.Request){
+func (p *Delivery) AddDeliveryWithoutGeoCode (w http.ResponseWriter, r *http.Request){
 	p.l.Println("Handle POST request -> delivery-api Module")
-	delivery := &data.AddDeliveryRequestWithGeoCode{}
+	delivery := &data.AddDeliveryRequestWithoutGeoCode{}
 
-	err:=delivery.FromJSONToAddDeliveryStruct(r.Body)
+	err:=delivery.FromJSONToAddDeliveryStructAdv(r.Body)
 	if err!=nil {
 		http.Error(w,"Data failed to unmarshel", http.StatusBadRequest)
 	}
 
 	//validate the data
-	err = delivery.ValidateAddDelivery()
+	err = delivery.ValidateAddDeliveryWG()
 	if err!=nil {
 		p.l.Println("Validation error in POST request -> delivery-api Module \n",err)
 		http.Error(w,fmt.Sprintf("Error in data validation : %s",err), http.StatusBadRequest)
@@ -33,7 +33,7 @@ func (p *Delivery) AddDeliveryGeoCode (w http.ResponseWriter, r *http.Request){
 	} 
 
 	//add delivery to elastic search
-	deliveryWithID := data.AddDeliveryWithGeoCode(delivery)
+	deliveryWithID := data.AddDeliveryWithoutGeoCode(delivery)
 
 	//writing to the io.Writer
 	err = deliveryWithID.FromAddDeliveryStructToJSON(w)

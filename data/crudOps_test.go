@@ -7,7 +7,7 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-func TestAddDeliveryWithGeoCode(t *testing.T) {
+/*func TestAddDeliveryWithGeoCode(t *testing.T) {
 
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "Shashank Sharma",
@@ -22,6 +22,24 @@ func TestAddDeliveryWithGeoCode(t *testing.T) {
 	}
 
 	res:= data.AddDeliveryWithGeoCode(delivery) 
+	if res==nil{
+		t.Fail()
+	}
+}*/
+
+func TestAddDeliveryWithoutGeoCode(t *testing.T) {
+
+	delivery := &data.AddDeliveryRequestWithoutGeoCode{
+		CustomerName : "Shashank Sharma",
+		CustomerAddress : "Shop no.7 new shri ram parisar behind regal homes Awadpuri bhopal, Bhopal-462022, Madhya Pradesh, India",
+		Phone : "9340212623",
+		ItemWeight : 6,
+		Pincode : "800025",
+		PaymentStatus : true,	
+		BybID : "5ff01d0e2af1c9df782ca7f7",
+	}
+
+	res:= data.AddDeliveryWithoutGeoCode(delivery) 
 	if res==nil{
 		t.Fail()
 	}
