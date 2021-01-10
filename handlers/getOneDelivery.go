@@ -15,7 +15,7 @@ import (
 //  422: errorValidation
 //  501: errorResponse
 
-func (p *Agents) GetSingleDelivery(w http.ResponseWriter, r *http.Request) {
+func (p *Delivery) GetSingleDelivery(w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> dlivery-api Module")
 	
 	vars := mux.Vars(r)
