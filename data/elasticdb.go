@@ -1,70 +1,153 @@
 package data
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 	log "github.com/sirupsen/logrus"
-	elastic "github.com/olivere/elastic/v7"
+	"bytes"
+	"context"
+	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/elastic/go-elasticsearch/v8/esutil"
+	"github.com/mitchellh/mapstructure"
+	
 )
 
-func GetESClient() (*elastic.Client, error) {
-	client, err :=  elastic.NewClient(elastic.SetURL("https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"),elastic.SetSniff(false),elastic.SetHealthcheck(false))
-	return client, err
-
-}
+var (
+	clusterURLs = []string{"https://390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"}
+	username    = "elastic"
+	password    = "w9XrZDRi0JZmxFV5vwk6tVCq"
+  )
 
 func InsertDeilveryWithGeoCode(d *AddDeliveryRequestWithGeoCode) string {
-	var res string
-	ctx := context.Background()
-	esclient, err := GetESClient()
-	if err != nil {
+	
+	var id string
+
+	cfg := elasticsearch.Config{
+		Addresses: clusterURLs,
+		Username:  username,
+		Password:  password,		
+	  }
+	  es, err := elasticsearch.NewClient(cfg)
+	  if err != nil {
 		log.Error("ElasticSearch initialization ERROR : ")
 		log.Error(err)
 	}
 
-	//get current date
 	currentTime := time.Now()
 	date:=currentTime.Format("01-02-2006")
 
-	dataJSON, err := json.Marshal(&d)
-	js := string(dataJSON)
-	ind, err := esclient.Index().Index(date).BodyJson(js).Do(ctx)
-
-	if err != nil {
-		log.Error("insertDataToElastic inserting ERROR : ")
-		log.Error(err)
-	}else{
-		res=ind.Id
-		fmt.Println("Delivery added to ElasticSearch with ID : ",ind.Id)
-	}
-	return res
+	res, _ := es.Index(date, esutil.NewJSONReader(d))
+	var r map[string]interface{}
+    if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
+    	log.Printf("Error parsing the response body: %s", err)
+    } else {
+    	// Print the response status and indexed document version.
+		id=fmt.Sprintf("%v", r["_id"])
+    }	
+	
+	log.Print(id)
+	return id
 }
 
 func InsertDeilveryWithoutGeoCode(d *AddDeliveryRequestWithoutGeoCode) string {
-	var res string
-	ctx := context.Background()
-	esclient, err := GetESClient()
-	if err != nil {
+	
+	var id string
+
+	cfg := elasticsearch.Config{
+		Addresses: clusterURLs,
+		Username:  username,
+		Password:  password,		
+	  }
+	  es, err := elasticsearch.NewClient(cfg)
+	  if err != nil {
 		log.Error("ElasticSearch initialization ERROR : ")
 		log.Error(err)
 	}
 
-	//get current date
 	currentTime := time.Now()
 	date:=currentTime.Format("01-02-2006")
 
-	dataJSON, err := json.Marshal(&d)
-	js := string(dataJSON)
-	ind, err := esclient.Index().Index(date).BodyJson(js).Do(ctx)
+	res, _ := es.Index(date, esutil.NewJSONReader(&d))
+	var r map[string]interface{}
+    if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
+    	log.Printf("Error parsing the response body: %s", err)
+    } else {
+    	// Print the response status and indexed document version.
+		id=fmt.Sprintf("%v", r["_id"])
+    }	
+	
+	log.Print(id)
+	return id
+}
 
-	if err != nil {
-		log.Error("insertDataToElastic inserting ERROR : ")
+func FetchDeliveryByID(docID string)  SingleDeliveryDetail{
+	var delivery SingleDeliveryDetail
+
+	var r  map[string]interface{}
+	cfg := elasticsearch.Config{
+		Addresses: clusterURLs,
+		Username:  username,
+		Password:  password,		
+	  }
+	  es, err := elasticsearch.NewClient(cfg)
+	  if err != nil {
+		log.Error("ElasticSearch initialization ERROR : ")
 		log.Error(err)
-	}else{
-		res=ind.Id
-		fmt.Println("Delivery added to ElasticSearch with ID : ",ind.Id)
 	}
-	return res
+
+	var buf bytes.Buffer
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"ids": map[string]interface{}{
+				"values": docID,
+			},
+		},
+	}
+	if err := json.NewEncoder(&buf).Encode(query); err != nil {
+		log.Error("Error encoding query : ")
+		log.Error(err)
+	}
+
+	// Perform the search request.
+	res, err := es.Search(
+		es.Search.WithContext(context.Background()),
+		es.Search.WithBody(&buf),
+		es.Search.WithTrackTotalHits(true),
+		es.Search.WithPretty(),
+	)
+	if err != nil {
+		log.Error("Error getting response : ")
+		log.Error(err)
+	}
+	defer res.Body.Close()
+
+	if res.IsError() {
+		var e map[string]interface{}
+		if err := json.NewDecoder(res.Body).Decode(&e); err != nil {
+			log.Error("Error parsing the response body : ")
+			log.Error(err)
+		} else {
+			// Print the response status and error information.
+			log.Fatalf("[%s] %s: %s",
+				res.Status(),
+				e["error"].(map[string]interface{})["type"],
+				e["error"].(map[string]interface{})["reason"],
+			)
+		}
+	}
+
+	if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
+		log.Error("Error parsing the response body : ")
+		log.Error(err)
+	}
+
+	// Print the ID and document source for each hit.
+	for _, hit := range r["hits"].(map[string]interface{})["hits"].([]interface{}) {
+		sourceMap := hit.(map[string]interface{})["_source"]
+		//log.Printf("%s",sourceMap)
+		mapstructure.Decode(sourceMap, &delivery)
+	}
+
+	return delivery
 }

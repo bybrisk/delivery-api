@@ -54,6 +54,16 @@ type AddDeliveryRequestWithGeoCode struct{
 	//
 	// required: true
 	BybID string `json;"bybID" validate:"required"` 
+
+	//Clusters assigned to the delivery through an internal algo
+	//
+	// required: false
+	ClusterID string `json:"clusterID"`
+
+	//Delivery agent assigned to the delivery using internal algo
+	//
+	// required: false
+	DeliveryAgentID string `json:"deliveryAgentID"`
 }
 
 //post request for adding delivery without geocode
@@ -107,6 +117,63 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	// You donot need to provide the APIKey. It is free rightnow
 	//
 	APIKey string `json:"apiKey"`
+
+	//Clusters assigned to the delivery through an internal algo
+	//
+	// required: false
+	ClusterID string `json:"clusterID"`
+
+	//Delivery agent assigned to the delivery using internal algo
+	//
+	// required: false
+	DeliveryAgentID string `json:"deliveryAgentID"`
+}
+
+//Response of a single Delivery struct
+type SingleDeliveryDetail struct {
+	// The full Name of the customer
+	//
+	CustomerName string `json: "customerName"`
+
+	// The full Address of the customer
+	//
+	CustomerAddress string `json: "customerAddress"`
+
+	// 10 digit mobile number
+	//
+	Phone string `json:"phone"`
+	
+	// Weight of the delivery in kg. (By default it is 5kg if not provided. Specify the weight to save on your max weight quota.)
+	//
+	ItemWeight float64 `json:"itemWeight"`
+	
+	// Pincode of the customer (specify for better agent allocation and optimization.)
+	//
+	Pincode string `json:"pincode"`
+	
+	// Status of the payment made by the customer (true or false)
+	//
+	PaymentStatus bool `json:"paymentStatus"`
+	
+	// Specify the latitude of the drop point (through your application) 
+	//
+	Latitude float64 `json:"latitude"`
+	
+	// Specify the longitude of the drop point (through your application) 
+	//
+	Longitude float64 `json:"longitude"`
+
+	// BybID of the business account this delivery is associatd to 
+	//
+	BybID string `json;"bybID"`
+
+	//Clusters the delivery is assigned to
+	//
+	ClusterID string `json:"clusterID"`
+
+	//Delivery agent the delivery is assigned to
+	//
+	DeliveryAgentID string `json:"deliveryAgentID"`
 }
 
 //post response

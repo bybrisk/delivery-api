@@ -1,10 +1,10 @@
 package data_test
 
 import (
-	"testing"
+	//"testing"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
-	"github.com/bybrisk/delivery-api/data"
+	//"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
@@ -27,7 +27,7 @@ import (
 	}
 }*/
 
-func TestAddDeliveryWithoutGeoCode(t *testing.T) {
+/*func TestAddDeliveryWithoutGeoCode(t *testing.T) {
 
 	delivery := &data.AddDeliveryRequestWithoutGeoCode{
 		CustomerName : "Shashank Sharma",
@@ -43,4 +43,4 @@ func TestAddDeliveryWithoutGeoCode(t *testing.T) {
 	if res==nil{
 		t.Fail()
 	}
-}
+}*/

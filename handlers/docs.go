@@ -67,3 +67,11 @@ type createDeliveryParmsWrapper struct {
 	// required: true
 	Body data.AddDeliveryRequestWithoutGeoCode
 }
+
+// Summary of a delivery associated to a business account
+// swagger:response getSingleDeliveryDetail
+type deliveryGetOneResponseWrapper struct {
+	// Summarised details of a delivery being recieved to a business account
+	// in: body
+	Body data.SingleDeliveryDetail
+}

@@ -62,3 +62,11 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	}
 	return &res
 }
+
+func GetOneDelivery(docID string) *SingleDeliveryDetail {
+
+	//Fetch the document from elastic search queue
+	res := FetchDeliveryByID(docID)
+
+	return &res
+}
