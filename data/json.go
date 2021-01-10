@@ -20,7 +20,7 @@ func (d *AddDeliveryRequestWithoutGeoCode) FromJSONToAddDeliveryStructAdv (r io.
 	return e.Decode(d)
 }
 
-func (d *SingleDeliveryDetail)GetOneDeliveryResultToJSON (w io.Writer) error {
+func (d *SingleDeliveryDetail) GetOneDeliveryResultToJSON (w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
