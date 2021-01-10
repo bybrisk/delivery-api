@@ -23,7 +23,7 @@ func (p *Delivery) GetSingleDelivery(w http.ResponseWriter, r *http.Request) {
 
 	lp := data.GetOneDelivery(id)
 
-	err := lp.GetAllAgentsResultToJSON(w)
+	err := lp.GetOneDeliveryResultToJSON(w)
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
 	}
