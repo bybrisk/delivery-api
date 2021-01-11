@@ -1,9 +1,9 @@
 package data_test
 
 import (
-	//"testing"
+	"testing"
 	//"fmt"
-	//"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestInsertDeilveryWithGeoCode(t *testing.T) {
@@ -17,12 +17,21 @@ import (
 		PaymentStatus : true,
 		Latitude : 23.4594578,
 		Longitude : 77.47784784,	
-		BybID : "o498h3958589th5gh",
+		BybID : "5ffb2f570a550230dc5e26a0",
 	}
 
-	_ = data.InsertDeilveryWithGeoCode(delivery)
+	_ = data.AddDeliveryWithGeoCode(delivery)
 	
 }*/
+
+func TestUpdateDeliveryStatus(t *testing.T) {
+	update := &data.UpdateDeliveryStatus{
+		DeliveryID: "U0Oe8nYBekxrDv_yAbNh",
+		DeliveryStatus:"Pending", 
+	}
+
+	_=data.UpdateDeliveryStatusCO(update)
+}
 
 /*func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
 

@@ -75,3 +75,12 @@ type deliveryGetOneResponseWrapper struct {
 	// in: body
 	Body data.SingleDeliveryDetail
 }
+
+// swagger:parameters updateDeliveryStatus
+type updateDeliveryStatusWrapper struct {
+	// Data structure to Update Delivery Status.
+	// Note: Can be updated by both admin and delivery app
+	// in: body
+	// required: true
+	Body data.UpdateDeliveryStatus
+}

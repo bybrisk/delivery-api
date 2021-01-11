@@ -8,6 +8,8 @@ import ("log"
 		"encoding/json")
 
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
+
+	d.DeliveryStatus = "Pending"
 	//save data to elastic search and return ID
 	res := InsertDeilveryWithGeoCode(d)
 
@@ -44,6 +46,7 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	json.Unmarshal(responseData, &responseObject)
 	d.Latitude = responseObject.Results[0].Geometry.Location.Lat
 	d.Longitude = responseObject.Results[0].Geometry.Location.Lng
+	d.DeliveryStatus = "Pending"
 	status := responseObject.Status
 	d.APIKey = "API"
 
@@ -69,4 +72,17 @@ func GetOneDelivery(docID string) *SingleDeliveryDetail {
 	res := FetchDeliveryByID(docID)
 
 	return &res
+}
+
+func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
+	//Update Delivery Status in ES Queue
+	res := UpdateDeilveryStatusES(d)
+
+	//sending response
+	response := DeliveryPostSuccess{
+		DeliveryID: res,
+		Message: "Delivery Status Updated",
+	}
+
+	return &response
 }

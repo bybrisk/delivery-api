@@ -64,6 +64,11 @@ type AddDeliveryRequestWithGeoCode struct{
 	//
 	// required: false
 	DeliveryAgentID string `json:"deliveryAgentID"`
+
+	//Delivery Status (It will be set to Pending by default)
+	//
+	// required: false
+	DeliveryStatus string `json:"deliveryStatus"`
 }
 
 //post request for adding delivery without geocode
@@ -127,6 +132,11 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	//
 	// required: false
 	DeliveryAgentID string `json:"deliveryAgentID"`
+
+	//Delivery Status (It will be set to Pending by default)
+	//
+	// required: false
+	DeliveryStatus string `json:"deliveryStatus"`
 }
 
 //Response of a single Delivery struct
@@ -174,6 +184,23 @@ type SingleDeliveryDetail struct {
 	//Delivery agent the delivery is assigned to
 	//
 	DeliveryAgentID string `json:"deliveryAgentID"`
+
+	//Delivery Status
+	//
+	DeliveryStatus string `json:"deliveryStatus"`
+}
+
+//Update Delivery Status Request
+type UpdateDeliveryStatus struct {
+	// DeliveryID of the Delivery whose status you want to change 
+	//
+	// required: true
+	DeliveryID string `json;"deliveryID" validate:"required"`
+
+	//Delivery Status ( Pending | Transit | Cancelled | Delivered )
+	//
+	// required: true
+	DeliveryStatus string `json:"deliveryStatus" validate:"required"`
 }
 
 //post response
@@ -206,6 +233,11 @@ func (d *AddDeliveryRequestWithGeoCode) ValidateAddDelivery() error {
 }
 
 func (d *AddDeliveryRequestWithoutGeoCode) ValidateAddDeliveryWG() error {
+	validate := validator.New()
+	return validate.Struct(d)
+}
+
+func (d *UpdateDeliveryStatus) ValidateUpdateDeliveryStatus() error {
 	validate := validator.New()
 	return validate.Struct(d)
 }
