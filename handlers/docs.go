@@ -84,3 +84,12 @@ type updateDeliveryStatusWrapper struct {
 	// required: true
 	Body data.UpdateDeliveryStatus
 }
+
+// swagger:parameters updateDeliveryAgent
+type updateDeliveryStatusWrapper struct {
+	// Data structure to Assign Delivery Agent.
+	// Note: Can be updated only by admin
+	// in: body
+	// required: true
+	Body data.UpdateDeliveryAgent
+}

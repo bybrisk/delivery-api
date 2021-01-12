@@ -182,3 +182,33 @@ func UpdateDeilveryStatusES(d *UpdateDeliveryStatus) string {
 	fmt.Println(id)
 	return id
 }
+
+func UpdateDeilveryAgentES(d *UpdateDeliveryAgent) string {
+	var id string
+	//Encode the data
+	postBody, _ := json.Marshal(map[string]map[string]string{
+		"doc": map[string]string{
+			"deliveryAgentID": d.DeliveryAgentID,
+		 },
+	 })
+	 responseBody := bytes.NewBuffer(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post("https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243/01-11-2021/_update/"+d.DeliveryID, "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	var r map[string]interface{}
+    if err := json.NewDecoder(resp.Body).Decode(&r); err != nil {
+    	log.Printf("Error parsing the response body: %s", err)
+    } else {
+    	// Print the response status and indexed document version.
+		id=fmt.Sprintf("%v", r["_id"])
+    }
+
+	fmt.Println(id)
+	return id
+}

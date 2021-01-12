@@ -20,6 +20,11 @@ func (d *UpdateDeliveryStatus) FromJSONToUpdateDeliveryStatus (r io.Reader) erro
 	return e.Decode(d)
 }
 
+func (d *UpdateDeliveryAgent) FromJSONToUpdateDeliveryAgent (r io.Reader) error {
+	e := json.NewDecoder(r)
+	return e.Decode(d)
+}
+
 func (d *AddDeliveryRequestWithoutGeoCode) FromJSONToAddDeliveryStructAdv (r io.Reader) error {
 	e := json.NewDecoder(r)
 	return e.Decode(d)

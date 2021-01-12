@@ -203,6 +203,19 @@ type UpdateDeliveryStatus struct {
 	DeliveryStatus string `json:"deliveryStatus" validate:"required"`
 }
 
+//Update Delivery Agent Request
+type UpdateDeliveryAgent struct {
+	// DeliveryID of the Delivery in which you want to assign the agent 
+	//
+	// required: true
+	DeliveryID string `json;"deliveryID" validate:"required"`
+
+	//BybID of the respective agent
+	//
+	// required: true
+	DeliveryAgentID string `json:"deliveryAgentID" validate:"required"`
+}
+
 //post response
 type DeliveryPostSuccess struct {
 	DeliveryID string `json:"deliveryID"`
@@ -238,6 +251,11 @@ func (d *AddDeliveryRequestWithoutGeoCode) ValidateAddDeliveryWG() error {
 }
 
 func (d *UpdateDeliveryStatus) ValidateUpdateDeliveryStatus() error {
+	validate := validator.New()
+	return validate.Struct(d)
+}
+
+func (d *UpdateDeliveryAgent) ValidateUpdateDeliveryAgent() error {
 	validate := validator.New()
 	return validate.Struct(d)
 }

@@ -86,3 +86,16 @@ func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
 
 	return &response
 }
+
+func UpdateDeliveryAgentCO(d *UpdateDeliveryAgent) *DeliveryPostSuccess {
+	//Update Delivery Status in ES Queue
+	res := UpdateDeilveryAgentES(d)
+
+	//sending response
+	response := DeliveryPostSuccess{
+		DeliveryID: res,
+		Message: "Delivery Agents Assigned",
+	}
+	
+	return &response
+}

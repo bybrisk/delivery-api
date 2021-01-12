@@ -24,13 +24,22 @@ import (
 	
 }*/
 
-func TestUpdateDeliveryStatus(t *testing.T) {
+/*func TestUpdateDeliveryStatus(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
 		DeliveryID: "U0Oe8nYBekxrDv_yAbNh",
 		DeliveryStatus:"Pending", 
 	}
 
 	_=data.UpdateDeliveryStatusCO(update)
+}*/
+
+func TestUpdateDeliveryAgent(t *testing.T) {
+	update := &data.UpdateDeliveryAgent{
+		DeliveryID: "U0Oe8nYBekxrDv_yAbNh",
+		DeliveryAgentID:"Amit001", 
+	}
+
+	_=data.UpdateDeliveryAgentCO(update)
 }
 
 /*func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
