@@ -15,7 +15,7 @@ import (
 //  422: errorValidation
 //  501: errorResponse
 
-func (p *Delivery) UpdateDeliveryStatusAPI (w http.ResponseWriter, r *http.Request){
+func (p *Delivery) UpdateDeliveryAgentAPI (w http.ResponseWriter, r *http.Request){
 	p.l.Println("Handle POST request -> delivery-api Module")
 	delivery := &data.UpdateDeliveryAgent{}
 

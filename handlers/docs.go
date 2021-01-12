@@ -86,7 +86,7 @@ type updateDeliveryStatusWrapper struct {
 }
 
 // swagger:parameters updateDeliveryAgent
-type updateDeliveryStatusWrapper struct {
+type updateDeliveryAgentWrapper struct {
 	// Data structure to Assign Delivery Agent.
 	// Note: Can be updated only by admin
 	// in: body
