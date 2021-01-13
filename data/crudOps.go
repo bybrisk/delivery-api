@@ -14,9 +14,9 @@ func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSucc
 	res := InsertDeilveryWithGeoCode(d)
 
 	//Fetch Pending Delivery
-	count:=GetPendingDelivery(d.BybID)
+	count:=GetDeliveryFrequency(d.BybID)
 	//update pending delivery of business account
-	_=UpdatePendingDlivery(d.BybID,count.DeliveryPending)
+	_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
 
 	//sending response
 	var response = DeliveryPostSuccess{
@@ -54,9 +54,9 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	Id := InsertDeilveryWithoutGeoCode(d)
 
 	//Fetch Pending Delivery
-	count:=GetPendingDelivery(d.BybID)
+	count:=GetDeliveryFrequency(d.BybID)
 	//update pending delivery of business account
-	_=UpdatePendingDlivery(d.BybID,count.DeliveryPending)
+	_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
 
 	//sending response
 	var res = DeliveryPostSuccess{
@@ -76,11 +76,26 @@ func GetOneDelivery(docID string) *SingleDeliveryDetail {
 
 func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
 	//Update Delivery Status in ES Queue
-	res := UpdateDeilveryStatusES(d)
+	_ = UpdateDeilveryStatusES(d)
 
+	//Fetch frequency of this status 
+	count:=GetDeliveryFrequency(d.BybID)
+
+	if (d.DeliveryStatus=="Transit"){
+		_=DecreasePendingDelivery(d.BybID,count.DeliveryPending)
+		_=UpdateTransitDelivery(d.BybID,count.DeliveryTransit)
+	}
+	if (d.DeliveryStatus=="Cancelled"){
+		_=DecreaseTransitDelivery(d.BybID,count.DeliveryTransit)
+		_=UpdateCancelledDelivery(d.BybID,count.DeliveryCancelled)
+	}
+	if (d.DeliveryStatus=="Delivered"){
+		_=DecreaseTransitDelivery(d.BybID,count.DeliveryTransit)
+		_=UpdateDeliveredDelivery(d.BybID,count.DeliveryDelivered)
+	}
 	//sending response
 	response := DeliveryPostSuccess{
-		DeliveryID: res,
+		DeliveryID: d.DeliveryID,
 		Message: "Delivery Status Updated",
 	}
 
@@ -89,11 +104,11 @@ func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
 
 func UpdateDeliveryAgentCO(d *UpdateDeliveryAgent) *DeliveryPostSuccess {
 	//Update Delivery Status in ES Queue
-	res := UpdateDeilveryAgentES(d)
+	_ = UpdateDeilveryAgentES(d)
 
 	//sending response
 	response := DeliveryPostSuccess{
-		DeliveryID: res,
+		DeliveryID: d.DeliveryID,
 		Message: "Delivery Agents Assigned",
 	}
 	

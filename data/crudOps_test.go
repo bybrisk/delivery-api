@@ -1,14 +1,13 @@
 package data_test
 
 import (
-	//"testing"
+	"testing"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
-	//"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
-
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "Shashank Sharma",
 		CustomerAddress : "A.G Colony, Chetna Samiti, Near Bank of Baroda, Patna, Bihar-800025",
@@ -27,16 +26,15 @@ import (
 	}
 }*/
 
-/*func TestAddDeliveryWithoutGeoCode(t *testing.T) {
-
-	delivery := &data.AddDeliveryRequestWithoutGeoCode{
-		CustomerName : "Shashank Sharma",
+/*func TestAddDeliveryWithoutGeoCode(t *testing.T){
+    delivery := &data.AddDeliveryRequestWithoutGeoCode{
+		CustomerName : "Mitali Bansal Sharma",
 		CustomerAddress : "Shop no.7 new shri ram parisar behind regal homes Awadpuri bhopal, Bhopal-462022, Madhya Pradesh, India",
 		Phone : "9340212623",
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "5ff01d0e2af1c9df782ca7f7",
+		BybID : "5ffc9e2d0a550230dc5e26a3",
 	}
 
 	res:= data.AddDeliveryWithoutGeoCode(delivery) 
@@ -44,3 +42,13 @@ import (
 		t.Fail()
 	}
 }*/
+
+func TestUpdateDeliveryStatusCO(t *testing.T) {
+	update := &data.UpdateDeliveryStatus{
+		BybID:"5ffc9e2d0a550230dc5e26a3",
+		DeliveryID: "VkMJ-nYBekxrDv_yzbOi",
+		DeliveryStatus: "Delivered",
+	}
+
+	_= data.UpdateDeliveryStatusCO(update)
+}

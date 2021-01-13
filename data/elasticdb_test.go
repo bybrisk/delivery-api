@@ -1,9 +1,9 @@
 package data_test
 
 import (
-	"testing"
+//	"testing"
 	//"fmt"
-	"github.com/bybrisk/delivery-api/data"
+//	"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestInsertDeilveryWithGeoCode(t *testing.T) {
@@ -26,21 +26,22 @@ import (
 
 /*func TestUpdateDeliveryStatus(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
-		DeliveryID: "U0Oe8nYBekxrDv_yAbNh",
-		DeliveryStatus:"Pending", 
+		BybID:"5ffc9e2d0a550230dc5e26a3",
+		DeliveryID: "VEP4-XYBekxrDv_ym7MC",
+		DeliveryStatus: "Pending",
 	}
 
-	_=data.UpdateDeliveryStatusCO(update)
+	_=data.UpdateDeilveryStatusES(update)
 }*/
 
-func TestUpdateDeliveryAgent(t *testing.T) {
+/*func TestUpdateDeliveryAgent(t *testing.T) {
 	update := &data.UpdateDeliveryAgent{
-		DeliveryID: "U0Oe8nYBekxrDv_yAbNh",
-		DeliveryAgentID:"Amit001", 
+		DeliveryID: "VEP4-XYBekxrDv_ym7MC",
+		DeliveryAgentID:"shashank001", 
 	}
 
 	_=data.UpdateDeliveryAgentCO(update)
-}
+}*/
 
 /*func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
 
@@ -51,7 +52,7 @@ func TestUpdateDeliveryAgent(t *testing.T) {
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "5ffb2f570a550230dc5e26a0",
+		BybID : "5ffc9e2d0a550230dc5e26a3",
 	}
 
 	_ = data.AddDeliveryWithoutGeoCode(delivery)

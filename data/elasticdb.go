@@ -14,10 +14,15 @@ import (
 	
 )
 
+var Elasticurl string = "https://390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"
+var UsernameElastic string = "elastic"
+var Elasticpassword string = "w9XrZDRi0JZmxFV5vwk6tVCq"
+var urlAuthenticate string = "https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"
+
 var (
-	clusterURLs = []string{"https://390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243"}
-	username    = "elastic"
-	password    = "w9XrZDRi0JZmxFV5vwk6tVCq"
+	clusterURLs = []string{Elasticurl}
+	username    = UsernameElastic
+	password    = Elasticpassword
   )
 
 func InsertDeilveryWithGeoCode(d *AddDeliveryRequestWithGeoCode) string {
@@ -156,14 +161,21 @@ func FetchDeliveryByID(docID string)  SingleDeliveryDetail{
 func UpdateDeilveryStatusES(d *UpdateDeliveryStatus) string {
 	var id string
 	//Encode the data
-	postBody, _ := json.Marshal(map[string]map[string]string{
-		"doc": map[string]string{
-			"deliveryStatus": d.DeliveryStatus,
-		 },
-	 })
-	 responseBody := bytes.NewBuffer(postBody)
+	postBody:=`{
+		"script" : {
+			"source": "ctx._source.deliveryStatus='`+d.DeliveryStatus+`';",
+			"lang": "painless"  
+		  },
+		  "query": {
+			  "ids" : {
+			"values" : "`+d.DeliveryID+`"
+			}
+		  }
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post("https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243/01-11-2021/_update/"+d.DeliveryID, "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_update_by_query?conflicts=proceed", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {
@@ -176,7 +188,7 @@ func UpdateDeilveryStatusES(d *UpdateDeliveryStatus) string {
     	log.Printf("Error parsing the response body: %s", err)
     } else {
     	// Print the response status and indexed document version.
-		id=fmt.Sprintf("%v", r["_id"])
+		id=fmt.Sprintf("%v", r["updated"])
     }
 
 	fmt.Println(id)
@@ -186,14 +198,21 @@ func UpdateDeilveryStatusES(d *UpdateDeliveryStatus) string {
 func UpdateDeilveryAgentES(d *UpdateDeliveryAgent) string {
 	var id string
 	//Encode the data
-	postBody, _ := json.Marshal(map[string]map[string]string{
-		"doc": map[string]string{
-			"deliveryAgentID": d.DeliveryAgentID,
-		 },
-	 })
-	 responseBody := bytes.NewBuffer(postBody)
+	postBody:=`{
+		"script" : {
+			"source": "ctx._source.deliveryAgentID='`+d.DeliveryAgentID+`';",
+			"lang": "painless"  
+		  },
+		  "query": {
+			  "ids" : {
+			"values" : "`+d.DeliveryID+`"
+			}
+		  }
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post("https://elastic:w9XrZDRi0JZmxFV5vwk6tVCq@390142e4769147acb17debc402b8474b.ap-south-1.aws.elastic-cloud.com:9243/01-11-2021/_update/"+d.DeliveryID, "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_update_by_query?conflicts=proceed", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {
@@ -206,7 +225,7 @@ func UpdateDeilveryAgentES(d *UpdateDeliveryAgent) string {
     	log.Printf("Error parsing the response body: %s", err)
     } else {
     	// Print the response status and indexed document version.
-		id=fmt.Sprintf("%v", r["_id"])
+		id=fmt.Sprintf("%v", r["updated"])
     }
 
 	fmt.Println(id)

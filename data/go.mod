@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/elastic/go-elasticsearch/v8 v8.0.0-20201229214741-2366c2514674
 	github.com/go-playground/validator/v10 v10.4.1
-	github.com/mitchellh/mapstructure v1.4.0
+	github.com/mitchellh/mapstructure v1.4.1
 	github.com/shashank404error/shashankMongo v0.0.0-20201109162158-63e199481d52
 	github.com/sirupsen/logrus v1.7.0
 	go.mongodb.org/mongo-driver v1.4.4

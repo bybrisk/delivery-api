@@ -164,10 +164,7 @@ type SingleDeliveryDetail struct {
 	// Status of the payment made by the customer (true or false)
 	//
 	PaymentStatus bool `json:"paymentStatus"`
-	
-	// Specify the latitude of the drop point (through your application) 
-	//
-	Latitude float64 `json:"latitude"`
+	TestAddDeliveryWithGeoCode float64 `json:"latitude"`
 	
 	// Specify the longitude of the drop point (through your application) 
 	//
@@ -192,6 +189,10 @@ type SingleDeliveryDetail struct {
 
 //Update Delivery Status Request
 type UpdateDeliveryStatus struct {
+	// BybID of the business account this delivery is associatd to 
+	//
+	BybID string `json;"bybID" validate:"required"`
+
 	// DeliveryID of the Delivery whose status you want to change 
 	//
 	// required: true
@@ -225,6 +226,8 @@ type DeliveryPostSuccess struct {
 type DeliveryCountStatus struct {
 	DeliveryPending string `json:"deliveryPending"`
 	DeliveryDelivered string `json:"deliveryDelivered"`
+	DeliveryCancelled string `json: "deliveryCancelled"`
+	DeliveryTransit string `json: "deliveryTransit"`
 }
 
 //data structure to access Geocode from Google Map API
