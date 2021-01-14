@@ -114,3 +114,11 @@ func UpdateDeliveryAgentCO(d *UpdateDeliveryAgent) *DeliveryPostSuccess {
 	
 	return &response
 }
+
+func GetAllDeliveryByBybID(docID string) *DeliveryResponseBulk {
+
+	//Fetch all deliveries having similar businessID
+	res := FetchAllDeliveryES(docID)
+	
+	return &res
+}

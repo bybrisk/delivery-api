@@ -164,9 +164,12 @@ type SingleDeliveryDetail struct {
 	// Status of the payment made by the customer (true or false)
 	//
 	PaymentStatus bool `json:"paymentStatus"`
-	TestAddDeliveryWithGeoCode float64 `json:"latitude"`
+
+	// latitude of the drop point 
+	//
+	Latitude float64 `json:"latitude"`
 	
-	// Specify the longitude of the drop point (through your application) 
+	// longitude of the drop point 
 	//
 	Longitude float64 `json:"longitude"`
 
@@ -215,6 +218,42 @@ type UpdateDeliveryAgent struct {
 	//
 	// required: true
 	DeliveryAgentID string `json:"deliveryAgentID" validate:"required"`
+}
+
+//get all deliveries Response struct
+/*type DeliveryResponseBulk struct {
+	// Array of deliveries
+	//
+	Result []SingleDeliveryDetail `json:"result"`
+
+	// BybID of business
+	//
+	BusinessID string `json:"businessid"`
+
+}*/
+
+type DeliveryResponseBulk struct {
+	Hits struct {
+		Hits []struct {
+			Index  string `json:"_index"`
+			ID     string `json:"_id"`
+			Source struct {
+				Pincode         string  `json:"pincode"`
+				APIKey          string  `json:"apiKey"`
+				Latitude        float64 `json:"latitude"`
+				ClusterID       string  `json:"clusterID"`
+				DeliveryAgentID string  `json:"deliveryAgentID"`
+				Phone           string  `json:"phone"`
+				CustomerName    string  `json:"CustomerName"`
+				BybID           string  `json:"BybID"`
+				ItemWeight      int     `json:"itemWeight"`
+				PaymentStatus   bool    `json:"paymentStatus"`
+				DeliveryStatus  string  `json:"deliveryStatus"`
+				CustomerAddress string  `json:"CustomerAddress"`
+				Longitude       float64 `json:"longitude"`
+			} `json:"_source"`
+		} `json:"hits"`
+	} `json:"hits"`
 }
 
 //post response

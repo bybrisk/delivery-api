@@ -2,6 +2,7 @@ package data_test
 
 import (
 	"testing"
+	"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -43,7 +44,7 @@ import (
 	}
 }*/
 
-func TestUpdateDeliveryStatusCO(t *testing.T) {
+/*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
 		BybID:"5ffc9e2d0a550230dc5e26a3",
 		DeliveryID: "VkMJ-nYBekxrDv_yzbOi",
@@ -51,4 +52,9 @@ func TestUpdateDeliveryStatusCO(t *testing.T) {
 	}
 
 	_= data.UpdateDeliveryStatusCO(update)
+}*/
+
+func TestGetAllDeliveries(t *testing.T) {
+	res:= data.GetAllDeliveryByBybID("5ffc9e2d0a550230dc5e26a3")
+	fmt.Println(res)
 }

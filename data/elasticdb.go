@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"context"
 	"net/http"
+	"io/ioutil"
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esutil"
 	"github.com/mitchellh/mapstructure"
@@ -230,4 +231,43 @@ func UpdateDeilveryAgentES(d *UpdateDeliveryAgent) string {
 
 	fmt.Println(id)
 	return id
+}
+
+func FetchAllDeliveryES(docID string) DeliveryResponseBulk {
+	var deliveries DeliveryResponseBulk
+
+	postBody:=`{
+		"query": {
+		  "bool": {
+			"filter": [
+			  {"term": {
+				"BybID": "`+docID+`"
+			  }}
+			]
+		  }
+		}
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search", "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	 body, err := ioutil.ReadAll(resp.Body)
+	 if err != nil {
+		log.Error("ReadAll ERROR : ")
+		log.Error(err)
+	 }
+	 
+	 err = json.Unmarshal(body, &deliveries)
+	 if err != nil {
+		log.Error("json.Unmarshal ERROR : ")
+		log.Error(err)
+    	} 
+	return deliveries
 }
