@@ -221,35 +221,70 @@ type UpdateDeliveryAgent struct {
 }
 
 //get all deliveries Response struct
-/*type DeliveryResponseBulk struct {
-	// Array of deliveries
-	//
-	Result []SingleDeliveryDetail `json:"result"`
-
-	// BybID of business
-	//
-	BusinessID string `json:"businessid"`
-
-}*/
-
 type DeliveryResponseBulk struct {
 	Hits struct {
 		Hits []struct {
+			//Date of delivery
+			//
 			Index  string `json:"_index"`
+
+			//ID of delivery
+			//
 			ID     string `json:"_id"`
+
+			//Delivery details
+			//
 			Source struct {
+				//Pincode of delivery location
+				//
 				Pincode         string  `json:"pincode"`
+
+				//API Key used in the delivery
+				//
 				APIKey          string  `json:"apiKey"`
+
+				//Latitude of delivery location
+				//
 				Latitude        float64 `json:"latitude"`
+
+				//ClusterID of the cluster this delivery falls into
+				//
 				ClusterID       string  `json:"clusterID"`
+
+				//AgentID of the agent associated with the delivery
+				//
 				DeliveryAgentID string  `json:"deliveryAgentID"`
+
+				//Phone number of the customer placing delivery
+				//
 				Phone           string  `json:"phone"`
+
+				//Name of the customer placing delivery
+				//
 				CustomerName    string  `json:"CustomerName"`
+
+				//Business ID associated with the delivery
+				//
 				BybID           string  `json:"BybID"`
+
+				//Weight of Item delivered
+				//
 				ItemWeight      int     `json:"itemWeight"`
+
+				//Is payment done or not
+				//
 				PaymentStatus   bool    `json:"paymentStatus"`
+
+				//Status of Delivery
+				//
 				DeliveryStatus  string  `json:"deliveryStatus"`
+
+				//Address of delivery
+				//
 				CustomerAddress string  `json:"CustomerAddress"`
+
+				//Longitude of delivery location
+				//
 				Longitude       float64 `json:"longitude"`
 			} `json:"_source"`
 		} `json:"hits"`
