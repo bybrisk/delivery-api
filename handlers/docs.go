@@ -76,6 +76,14 @@ type deliveryGetOneResponseWrapper struct {
 	Body data.SingleDeliveryDetail
 }
 
+// Summary of all delivery associated to a business account
+// swagger:response getAllDeliveryDetail
+type deliveryGetAllResponseWrapper struct {
+	// Summarised details of all deliveries of a business account
+	// in: body
+	Body data.DeliveryResponseBulk
+}
+
 // swagger:parameters updateDeliveryStatus
 type updateDeliveryStatusWrapper struct {
 	// Data structure to Update Delivery Status.

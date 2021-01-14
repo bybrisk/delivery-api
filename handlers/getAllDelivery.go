@@ -23,7 +23,7 @@ func (p *Delivery) GetAllDelivery(w http.ResponseWriter, r *http.Request) {
 
 	lp := data.GetAllDeliveryByBybID(id)
 
-	err := lp.GetOneDeliveryResultToJSON(w)
+	err := lp.GetAllDeliveryResultToJSON(w)
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
 	}

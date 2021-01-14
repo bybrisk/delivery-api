@@ -34,3 +34,8 @@ func (d *SingleDeliveryDetail) GetOneDeliveryResultToJSON (w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
+
+func (d *DeliveryResponseBulk) GetAllDeliveryResultToJSON (w io.Writer) error {
+	e := json.NewEncoder(w)
+	return e.Encode(d)
+}
