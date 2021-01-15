@@ -1,12 +1,12 @@
 package data_test
 
 import (
-//	"testing"
+	"testing"
 	//"fmt"
-//	"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 )
 
-/*func TestInsertDeilveryWithGeoCode(t *testing.T) {
+func TestInsertDeilveryWithGeoCode(t *testing.T) {
 
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "charan Prasad Parihar",
@@ -17,12 +17,12 @@ import (
 		PaymentStatus : true,
 		Latitude : 23.4594578,
 		Longitude : 77.47784784,	
-		BybID : "5ffb2f570a550230dc5e26a0",
+		BybID : "5fff310b00a7284754cd9b57",
 	}
 
 	_ = data.AddDeliveryWithGeoCode(delivery)
 	
-}*/
+}
 
 /*func TestUpdateDeliveryStatus(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
