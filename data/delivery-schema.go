@@ -35,7 +35,7 @@ type AddDeliveryRequestWithGeoCode struct{
 	// required: true
 	Pincode string `json:"pincode" validate:"required"`
 	
-	// Status of the payment made by the customer (true or false)
+	// Status of the payment made by the customer (true or false) - Payment done or not
 	//
 	PaymentStatus bool `json:"paymentStatus"`
 	
