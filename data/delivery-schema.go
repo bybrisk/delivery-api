@@ -37,7 +37,6 @@ type AddDeliveryRequestWithGeoCode struct{
 	
 	// Status of the payment made by the customer (true or false)
 	//
-	// required: true
 	PaymentStatus bool `json:"paymentStatus" validate:"required"`
 	
 	// Specify the latitude of the drop point (through your application) 
@@ -103,7 +102,6 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	
 	// Status of the payment made by the customer (true or false)
 	//
-	// required: true
 	PaymentStatus bool `json:"paymentStatus" validate:"required"`
 	
 	// You donot need to provide the latitude. It is filled by the API
