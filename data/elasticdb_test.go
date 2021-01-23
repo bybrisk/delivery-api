@@ -1,12 +1,12 @@
 package data_test
 
 import (
-	"testing"
+	//"testing"
 	//"fmt"
-	"github.com/bybrisk/delivery-api/data"
+	//"github.com/bybrisk/delivery-api/data"
 )
 
-func TestInsertDeilveryWithGeoCode(t *testing.T) {
+/*func TestInsertDeilveryWithGeoCode(t *testing.T) {
 
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "charan Prasad Parihar",
@@ -22,13 +22,13 @@ func TestInsertDeilveryWithGeoCode(t *testing.T) {
 
 	_ = data.AddDeliveryWithGeoCode(delivery)
 	
-}
+}*/
 
 /*func TestUpdateDeliveryStatus(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
-		BybID:"5ffc9e2d0a550230dc5e26a3",
-		DeliveryID: "VEP4-XYBekxrDv_ym7MC",
-		DeliveryStatus: "Pending",
+		BybID:"6005bfcb53b27c07c1539ea8",
+		DeliveryID: "fKJpMHcBp6NVLwShJKif",
+		DeliveryStatus: "Transit",
 	}
 
 	_=data.UpdateDeilveryStatusES(update)
@@ -37,7 +37,7 @@ func TestInsertDeilveryWithGeoCode(t *testing.T) {
 /*func TestUpdateDeliveryAgent(t *testing.T) {
 	updatFetchAllDeliveryES
 
-/*func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
+func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
 FetchAllDeliveryESincode : "800025",
 		PaymentStatus : true,	
 		BybID : "5ffc9e2d0a550230dc5e26a3",
@@ -53,6 +53,6 @@ FetchAllDeliveryESincode : "800025",
 }*/
 
 /*func TestGetAllDeliveries(t *testing.T){
-	_= data.FetchAllDeliveryES("5ffc9e2d0a550230dc5e26a3")
-
+	res:= data.FetchAllDeliveryES("6005bfcb53b27c07c1539ea8")
+	fmt.Println(res)
 }*/

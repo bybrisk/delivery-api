@@ -1,11 +1,11 @@
 package data_test
 
 import (
-	//"testing"
-	//"fmt"
+	"testing"
+	"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
-	//"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
@@ -54,7 +54,7 @@ import (
 	_= data.UpdateDeliveryStatusCO(update)
 }*/
 
-/*func TestGetAllDeliveries(t *testing.T) {
-	res:= data.GetAllDeliveryByBybID("5ffc9e2d0a550230dc5e26a3")
+func TestGetAllDeliveries(t *testing.T) {
+	res:= data.GetAllDeliveryByBybID("6005bfcb53b27c07c1539ea8")
 	fmt.Println(res)
-}*/
+}

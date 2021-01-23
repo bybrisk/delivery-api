@@ -18,7 +18,7 @@ import (
 var Elasticurl string = "https://8bc5fdbc65f747489008a41f4c4ca982.ap-south-1.aws.elastic-cloud.com:9243"
 var UsernameElastic string = "elastic"
 var Elasticpassword string = "djC1Gygc6eA7POPKaR7qM4jf"
-var urlAuthenticate string = "https://elastic:djC1Gygc6eA7POPKaR7qM4jf@s8bc5fdbc65f747489008a41f4c4ca982.ap-south-1.aws.elastic-cloud.com:9243"
+var urlAuthenticate string = "https://elastic:djC1Gygc6eA7POPKaR7qM4jf@8bc5fdbc65f747489008a41f4c4ca982.ap-south-1.aws.elastic-cloud.com:9243"
 
 var (
 	clusterURLs = []string{Elasticurl}
