@@ -267,7 +267,7 @@ type DeliveryResponseBulk struct {
 
 				//Weight of Item delivered
 				//
-				ItemWeight      int     `json:"itemWeight"`
+				ItemWeight      float64     `json:"itemWeight"`
 
 				//Is payment done or not
 				//
