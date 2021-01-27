@@ -245,7 +245,10 @@ func FetchAllDeliveryES(docID string) DeliveryResponseBulk {
 			  }}
 			]
 		  }
-		}
+		},
+		"sort" : [
+    { "rankingTime" : "desc" }
+  ]
 	  }`
 
 	 responseBody := bytes.NewBufferString(postBody)

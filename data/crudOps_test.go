@@ -10,15 +10,16 @@ import (
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
 	delivery := &data.AddDeliveryRequestWithGeoCode{
-		CustomerName : "Shashank Sharma",
+		CustomerName : "Charan Parihar",
 		CustomerAddress : "A.G Colony, Chetna Samiti, Near Bank of Baroda, Patna, Bihar-800025",
 		Phone : "9340212623",
 		ItemWeight : 6,
 		Pincode : "800025",
-		PaymentStatus : true,
+		PaymentStatus : false,
 		Latitude : 23.4594578,
 		Longitude : 77.47784784,	
-		BybID : "5ff01d0e2af1c9df782ca7f7",
+		BybID : "60093975e6c847545ac2fdf1",
+		Amount: 234,
 	}
 
 	res:= data.AddDeliveryWithGeoCode(delivery) 
@@ -29,13 +30,14 @@ import (
 
 /*func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
-		CustomerName : "Mitali Bansal Sharma",
+		CustomerName : "Latest By all means",
 		CustomerAddress : "Shop no.7 new shri ram parisar behind regal homes Awadpuri bhopal, Bhopal-462022, Madhya Pradesh, India",
 		Phone : "9340212623",
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "5ffc9e2d0a550230dc5e26a3",
+		BybID : "60093975e6c847545ac2fdf1",
+		Amount: 235,
 	}
 
 	res:= data.AddDeliveryWithoutGeoCode(delivery) 
@@ -46,15 +48,20 @@ import (
 
 /*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
-		BybID:"5ffc9e2d0a550230dc5e26a3",
-		DeliveryID: "VkMJ-nYBekxrDv_yzbOi",
-		DeliveryStatus: "Delivered",
+		BybID:"600d95c5d72ee5dd5896dd75",
+		DeliveryID: "bghPQ3cBtAErZoYVdURZ",
+		DeliveryStatus: "Pending-Cancelled",
 	}
 
 	_= data.UpdateDeliveryStatusCO(update)
 }*/
 
 func TestGetAllDeliveries(t *testing.T) {
-	res:= data.GetAllDeliveryByBybID("6005bfcb53b27c07c1539ea8")
+	res:= data.GetAllDeliveryByBybID("60093975e6c847545ac2fdf1")
 	fmt.Println(res)
 }
+
+/*func TestGetSingleDelivery(t *testing.T) {
+	res:= data.GetOneDelivery("bghPQ3cBtAErZoYVdURZ")
+	fmt.Println(res)
+}*/

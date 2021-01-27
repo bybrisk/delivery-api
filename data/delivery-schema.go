@@ -68,6 +68,21 @@ type AddDeliveryRequestWithGeoCode struct{
 	//
 	// required: false
 	DeliveryStatus string `json:"deliveryStatus"`
+
+	//Delivery Ranking Time (It will be set using an internal algo)
+	//
+	// required: false
+	RankingTime int64 `json:"rankingTime"`
+
+	//TimeStamp of Delivery (It will be set automatically)
+	//
+	// required: false
+	TimeStamp string `json:"timeStamp"`
+
+	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	//
+	// required: false
+	Amount float64 `json:"amount"`
 }
 
 //post request for adding delivery without geocode
@@ -135,6 +150,21 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	//
 	// required: false
 	DeliveryStatus string `json:"deliveryStatus"`
+
+	//Delivery Ranking Time (It will be set using an internal algo)
+	//
+	// required: false
+	RankingTime int64 `json:"rankingTime"`
+
+	//TimeStamp of Delivery (It will be set automatically)
+	//
+	// required: false
+	TimeStamp string `json:"timeStamp"`
+
+	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	//
+	// required: false
+	Amount float64 `json:"amount"`
 }
 
 //Response of a single Delivery struct
@@ -186,6 +216,14 @@ type SingleDeliveryDetail struct {
 	//Delivery Status
 	//
 	DeliveryStatus string `json:"deliveryStatus"`
+
+	//TimeStamp of Delivery (It will be set automatically)
+	//
+	TimeStamp string `json:"timeStamp"`
+
+	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	//
+	Amount float64 `json:"amount"`
 }
 
 //Update Delivery Status Request
@@ -284,6 +322,10 @@ type DeliveryResponseBulk struct {
 				//Longitude of delivery location
 				//
 				Longitude       float64 `json:"longitude"`
+
+				//Delivery Ranking Time (It will be set using an internal algo)
+				//
+				RankingTime int64 `json:"rankingTime"`
 			} `json:"_source"`
 		} `json:"hits"`
 	} `json:"hits"`

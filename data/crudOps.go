@@ -2,6 +2,7 @@ package data
 
 import ("log"
 		"fmt"
+		"time"
 		"io/ioutil"
 		"net/http"
 		"net/url"
@@ -10,6 +11,9 @@ import ("log"
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
 
 	d.DeliveryStatus = "Pending"
+	t2e2 := time.Now()
+	d.RankingTime = t2e2.UnixNano()
+	d.TimeStamp = t2e2.Format("2006-Jan-02 3:4:5 PM")
 	//save data to elastic search and return ID
 	res := InsertDeilveryWithGeoCode(d)
 
@@ -47,6 +51,11 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	d.Latitude = responseObject.Results[0].Geometry.Location.Lat
 	d.Longitude = responseObject.Results[0].Geometry.Location.Lng
 	d.DeliveryStatus = "Pending"
+	
+	t2e2 := time.Now()
+	d.RankingTime = t2e2.UnixNano()
+	d.TimeStamp = t2e2.Format("2006-Jan-02 3:4:5 PM")
+
 	status := responseObject.Status
 	d.APIKey = "API"
 
@@ -92,6 +101,10 @@ func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
 	if (d.DeliveryStatus=="Delivered"){
 		_=DecreaseTransitDelivery(d.BybID,count.DeliveryTransit)
 		_=UpdateDeliveredDelivery(d.BybID,count.DeliveryDelivered)
+	}
+	if (d.DeliveryStatus=="Pending-Cancelled"){
+		_=DecreasePendingDelivery(d.BybID,count.DeliveryPending)
+		_=UpdateCancelledDelivery(d.BybID,count.DeliveryCancelled)
 	}
 	//sending response
 	response := DeliveryPostSuccess{
