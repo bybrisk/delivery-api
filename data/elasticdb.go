@@ -160,6 +160,9 @@ func FetchDeliveryByID(docID string)  SingleDeliveryDetail{
 }
 
 func UpdateDeilveryStatusES(d *UpdateDeliveryStatus) string {
+	if (d.DeliveryStatus=="Pending-Cancelled"){
+		d.DeliveryStatus="Cancelled"
+	}
 	var id string
 	//Encode the data
 	postBody:=`{
