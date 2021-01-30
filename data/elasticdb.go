@@ -236,7 +236,7 @@ func UpdateDeilveryAgentES(d *UpdateDeliveryAgent) string {
 	return id
 }
 
-func FetchAllDeliveryES(docID string) DeliveryResponseBulk {
+func FetchAllDeliveryES(key string,docID string) DeliveryResponseBulk {
 	var deliveries DeliveryResponseBulk
 
 	postBody:=`{
@@ -244,7 +244,7 @@ func FetchAllDeliveryES(docID string) DeliveryResponseBulk {
 		  "bool": {
 			"filter": [
 			  {"term": {
-				"BybID": "`+docID+`"
+				"`+key+`": "`+docID+`"
 			  }}
 			]
 		  }
@@ -252,6 +252,84 @@ func FetchAllDeliveryES(docID string) DeliveryResponseBulk {
 		"sort" : [
     { "rankingTime" : "desc" }
   ]
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=500", "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	 body, err := ioutil.ReadAll(resp.Body)
+	 if err != nil {
+		log.Error("ReadAll ERROR : ")
+		log.Error(err)
+	 }
+	 
+	 err = json.Unmarshal(body, &deliveries)
+	 if err != nil {
+		log.Error("json.Unmarshal ERROR : ")
+		log.Error(err)
+    	} 
+	return deliveries
+}
+
+func FetchPendingDeliveryByAgentIdES(key string,docID string) DeliveryResponseBulk {
+	var deliveries DeliveryResponseBulk
+
+	postBody:=`{
+		"query": {
+		  "bool": {
+			"filter": [
+			  {"term": {"`+key+`": "`+docID+`"}},
+			  {"term" : {"deliveryStatus.keyword" : "Pending" }}
+			]
+		  }
+		}
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=500", "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	 body, err := ioutil.ReadAll(resp.Body)
+	 if err != nil {
+		log.Error("ReadAll ERROR : ")
+		log.Error(err)
+	 }
+	 
+	 err = json.Unmarshal(body, &deliveries)
+	 if err != nil {
+		log.Error("json.Unmarshal ERROR : ")
+		log.Error(err)
+    	} 
+	return deliveries
+}
+
+func FetchDeliveryHistoryByAgentIdES(key string,docID string) DeliveryResponseBulk {
+	var deliveries DeliveryResponseBulk
+
+	postBody:=`{
+		"query": {
+		  "bool": {
+			"filter": [
+			  {"term": {"`+key+`": "`+docID+`"}}
+			],
+			"must_not": [
+			  {"term":{"deliveryStatus.keyword": "Pending"}}
+			  ]
+		  }
+		}
 	  }`
 
 	 responseBody := bytes.NewBufferString(postBody)

@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	//"fmt"
+	"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -30,13 +30,13 @@ import (
 
 /*func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
-		CustomerName : "Latest By all means",
+		CustomerName : "Great Donna",
 		CustomerAddress : "Shop no.7 new shri ram parisar behind regal homes Awadpuri bhopal, Bhopal-462022, Madhya Pradesh, India",
 		Phone : "9340212623",
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "60093975e6c847545ac2fdf1",
+		BybID : "6013bc1aeef443c14c31f250",
 		Amount: 235,
 	}
 
@@ -46,18 +46,17 @@ import (
 	}
 }*/
 
-func TestUpdateDeliveryStatusCO(t *testing.T) {
+/*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
 		BybID:"6011acbee549b5b2e5ce2ce0",
 		DeliveryID: "o4YYRXcBMbaQ18HIx4w-",
 		DeliveryStatus: "Pending-Cancelled",
 	}
-
 	_= data.UpdateDeliveryStatusCO(update)
-}
+}*/
 
 /*func TestGetAllDeliveries(t *testing.T) {
-	res:= data.GetAllDeliveryByBybID("60093975e6c847545ac2fdf1")
+	res:= data.GetAllDeliveryByBybID("6013bc1aeef443c14c31f250")
 	fmt.Println(res)
 }*/
 
@@ -65,3 +64,13 @@ func TestUpdateDeliveryStatusCO(t *testing.T) {
 	res:= data.GetOneDelivery("bghPQ3cBtAErZoYVdURZ")
 	fmt.Println(res)
 }*/
+
+/*func TestGetPendingDeliveryByAgentID(t *testing.T){
+	res := data.GetAgentPendingDelivery("601401c24b06c2a9342b3017")
+	fmt.Println(res)
+}*/
+
+func TestGetDeliveryHistory(t *testing.T) {
+	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")
+	fmt.Println(res)
+}

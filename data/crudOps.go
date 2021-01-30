@@ -131,7 +131,23 @@ func UpdateDeliveryAgentCO(d *UpdateDeliveryAgent) *DeliveryPostSuccess {
 func GetAllDeliveryByBybID(docID string) *DeliveryResponseBulk {
 
 	//Fetch all deliveries having similar businessID
-	res := FetchAllDeliveryES(docID)
+	res := FetchAllDeliveryES("BybID",docID)
 	
+	return &res
+}
+
+func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
+
+	//Fetch all pending deliveries with agentID
+	res := FetchPendingDeliveryByAgentIdES("deliveryAgentID",docID)
+
+	return &res
+}
+
+func GetAgentDeliveryHistory(docID string) *DeliveryResponseBulk{
+
+	//Fetch all deliveries of an agent which are not pending
+	res := FetchDeliveryHistoryByAgentIdES("deliveryAgentID",docID)
+
 	return &res
 }
