@@ -6,7 +6,8 @@ import ("log"
 		"io/ioutil"
 		"net/http"
 		"net/url"
-		"encoding/json")
+		"encoding/json"
+	)
 
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
 
@@ -150,4 +151,17 @@ func GetAgentDeliveryHistory(docID string) *DeliveryResponseBulk{
 	res := FetchDeliveryHistoryByAgentIdES("deliveryAgentID",docID)
 
 	return &res
+}
+
+func UpdateDeliveryDistanceCO(d *UpdateDeliveryDistance) *DeliveryPostSuccess {
+	//Update Delivery distance in ES Queue
+	_ = UpdateDeilveryDistanceES(d)
+
+	//sending response
+	response := DeliveryPostSuccess{
+		DeliveryID: d.DeliveryID,
+		Message: "Delivery Distance Updated",
+	}
+	
+	return &response
 }

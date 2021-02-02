@@ -56,3 +56,11 @@ FetchAllDeliveryESincode : "800025",
 	res:= data.FetchAllDeliveryES("6005bfcb53b27c07c1539ea8")
 	fmt.Println(res)
 }*/
+
+/*func TestDeliveryDistance(t *testing.T){
+	update := &data.UpdateDeliveryDistance{
+		DeliveryID: "GIZ0T3cBMbaQ18HIq41k",
+		Distance: 12345,
+	}
+	_=data.UpdateDeilveryDistanceES(update)
+}*/

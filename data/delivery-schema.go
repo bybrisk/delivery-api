@@ -337,6 +337,18 @@ type DeliveryPostSuccess struct {
 	Message string `json:"message"`
 }
 
+type UpdateDeliveryDistance struct {
+	// DeliveryID of the Delivery in which you want to update the distance 
+	//
+	// required: true
+	DeliveryID string `json;"deliveryID" validate:"required"`
+
+	// Distance travelled by the agent (GPS based) in meters
+	//
+	// required: true
+	Distance float64 `json;"distance" validate:"required"`
+}
+
 type DeliveryCountStatus struct {
 	DeliveryPending string `json:"deliveryPending"`
 	DeliveryDelivered string `json:"deliveryDelivered"`
@@ -373,6 +385,11 @@ func (d *UpdateDeliveryStatus) ValidateUpdateDeliveryStatus() error {
 }
 
 func (d *UpdateDeliveryAgent) ValidateUpdateDeliveryAgent() error {
+	validate := validator.New()
+	return validate.Struct(d)
+}
+
+func (d *UpdateDeliveryDistance) ValidateUpdateDeliveryDistance() error {
 	validate := validator.New()
 	return validate.Struct(d)
 }

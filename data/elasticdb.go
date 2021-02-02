@@ -355,3 +355,40 @@ func FetchDeliveryHistoryByAgentIdES(key string,docID string) DeliveryResponseBu
     	} 
 	return deliveries
 }
+
+func UpdateDeilveryDistanceES(d *UpdateDeliveryDistance) string{
+	var id string
+	//Encode the data
+	postBody:=`{
+		"script" : {
+			"source": "ctx._source.distanceObserved=`+fmt.Sprintf("%f", d.Distance)+`;",
+			"lang": "painless"  
+		  },
+		  "query": {
+			  "ids" : {
+			"values" : "`+d.DeliveryID+`"
+			}
+		  }
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post(urlAuthenticate+"/_all/_update_by_query?conflicts=proceed", "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	var r map[string]interface{}
+    if err := json.NewDecoder(resp.Body).Decode(&r); err != nil {
+    	log.Printf("Error parsing the response body: %s", err)
+    } else {
+    	// Print the response status and indexed document version.
+		id=fmt.Sprintf("%v", r["updated"])
+    }
+
+	fmt.Println(id)
+	return id	
+}

@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	"fmt"
+	//"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -70,7 +70,15 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestGetDeliveryHistory(t *testing.T) {
+/*func TestGetDeliveryHistory(t *testing.T) {
 	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")
 	fmt.Println(res)
+}*/
+
+func TestUpdateDeliveryDistaneCO(t *testing.T){
+	update := &data.UpdateDeliveryDistance{
+		DeliveryID: "GIZ0T3cBMbaQ18HIq41k",
+		Distance: 340,
+	}
+	_=data.UpdateDeliveryDistanceCO(update)
 }

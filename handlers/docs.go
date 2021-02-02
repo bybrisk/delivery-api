@@ -42,7 +42,7 @@ type errorValidationWrapper struct {
 type noContentResponseWrapper struct {
 }
 
-// Success message on a single Delivery addition
+// Success message on a single Delivery addition/update
 // swagger:response deliveryPostResponse
 type accountPostResponseWrapper struct {
 	// Success message on newly added delivery
@@ -100,4 +100,13 @@ type updateDeliveryAgentWrapper struct {
 	// in: body
 	// required: true
 	Body data.UpdateDeliveryAgent
+}
+
+// swagger:parameters updateDeliveryDistance
+type updateDeliveryDistanceWrapper struct {
+	// Data structure to Update Delivery Distance.
+	// Note: Can be updated only by delivery person application
+	// in: body
+	// required: true
+	Body data.UpdateDeliveryDistance
 }
