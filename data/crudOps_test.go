@@ -18,7 +18,7 @@ import (
 		PaymentStatus : false,
 		Latitude : 23.4594578,
 		Longitude : 77.47784784,	
-		BybID : "60093975e6c847545ac2fdf1",
+		BybID : "6017ae0e5b706f00e918d040",
 		Amount: 234,
 	}
 
@@ -36,7 +36,7 @@ import (
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "6013bc1aeef443c14c31f250",
+		BybID : "6017ae0e5b706f00e918d040",
 		Amount: 235,
 	}
 
@@ -77,7 +77,7 @@ import (
 
 func TestUpdateDeliveryDistaneCO(t *testing.T){
 	update := &data.UpdateDeliveryDistance{
-		DeliveryID: "GIZ0T3cBMbaQ18HIq41k",
+		DeliveryID: "U41vYncBMpywLSXAVWAa",
 		Distance: 340,
 	}
 	_=data.UpdateDeliveryDistanceCO(update)

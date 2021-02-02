@@ -12,6 +12,7 @@ import ("log"
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
 
 	d.DeliveryStatus = "Pending"
+	d.DistanceObserved = 0
 	t2e2 := time.Now()
 	d.RankingTime = t2e2.UnixNano()
 	d.TimeStamp = t2e2.Format("2006-Jan-02 3:4:5 PM")
@@ -59,6 +60,7 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 
 	status := responseObject.Status
 	d.APIKey = "API"
+	d.DistanceObserved = 0
 
 	//save data to elastic search and return ID
 	Id := InsertDeilveryWithoutGeoCode(d)

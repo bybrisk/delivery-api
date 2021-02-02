@@ -54,6 +54,11 @@ type AddDeliveryRequestWithGeoCode struct{
 	// required: true
 	BybID string `json;"bybID" validate:"required"` 
 
+	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	//
+	// required: false
+	Amount float64 `json:"amount"`
+
 	//Clusters assigned to the delivery through an internal algo
 	//
 	// required: false
@@ -79,10 +84,10 @@ type AddDeliveryRequestWithGeoCode struct{
 	// required: false
 	TimeStamp string `json:"timeStamp"`
 
-	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	// Delivery Observed Distance (No need to set it, it will be done by algo)
 	//
 	// required: false
-	Amount float64 `json:"amount"`
+	DistanceObserved  float64  `json:"distanceObserved"`
 }
 
 //post request for adding delivery without geocode
@@ -118,7 +123,21 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	// Status of the payment made by the customer (true or false)
 	//
 	PaymentStatus bool `json:"paymentStatus"`
-	
+
+	// BybID of the business account this delivery is associatd to 
+	//
+	// required: true
+	BybID string `json;"bybID" validate:"required"`
+
+	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	//
+	// required: false
+	Amount float64 `json:"amount"`
+
+	// You donot need to provide the APIKey. It is free rightnow
+	//
+	APIKey string `json:"apiKey"`
+
 	// You donot need to provide the latitude. It is filled by the API
 	//
 	Latitude float64 `json:"latitude"`
@@ -126,15 +145,6 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	// You donot need to provide the longitude. It is filled by the API
 	//
 	Longitude float64 `json:"longitude"`
-
-	// BybID of the business account this delivery is associatd to 
-	//
-	// required: true
-	BybID string `json;"bybID" validate:"required"`
-
-	// You donot need to provide the APIKey. It is free rightnow
-	//
-	APIKey string `json:"apiKey"`
 
 	//Clusters assigned to the delivery through an internal algo
 	//
@@ -161,10 +171,10 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	// required: false
 	TimeStamp string `json:"timeStamp"`
 
-	//Amount to be colleced in INR ( if payment status is false i.e., Not Done)
+	// Delivery Observed Distance (No need to set it, it will be done by algo)
 	//
 	// required: false
-	Amount float64 `json:"amount"`
+	DistanceObserved  float64  `json:"distanceObserved"`
 }
 
 //Response of a single Delivery struct
