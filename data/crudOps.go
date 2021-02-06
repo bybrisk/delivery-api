@@ -7,7 +7,10 @@ import ("log"
 		"net/http"
 		"net/url"
 		"encoding/json"
+		"math"
 	)
+
+const earthRadius = float64(6371)
 
 func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSuccess{
 
@@ -144,7 +147,13 @@ func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
 	//Fetch all pending deliveries with agentID
 	res := FetchPendingDeliveryByAgentIdES("deliveryAgentID",docID)
 
-	return &res
+	//arrange delivery IDs from the array
+	sortedIDs := GetSortedArray(res)
+	res.SortedIdArray = sortedIDs
+
+	// match the index of the array based on the deliveryIDs
+
+	return res
 }
 
 func GetAgentDeliveryHistory(docID string) *DeliveryResponseBulk{
@@ -166,4 +175,56 @@ func UpdateDeliveryDistanceCO(d *UpdateDeliveryDistance) *DeliveryPostSuccess {
 	}
 	
 	return &response
+}
+
+func GetSortedArray(res *DeliveryResponseBulk) []string {
+	var minVal float64
+	//var sortedRes DeliveryResponseBulk
+	var arrOfIds []string
+	var arrOfDistance []float64
+	var k int
+	origin := GetGeocodes(res.Hits.Hits[0].Source.BybID)
+	latOrigin:=origin.Latitude
+	longOrigin:=origin.Longitude
+
+	for _,_= range res.Hits.Hits{	
+		minVal=9999999999999
+		for i,hit := range res.Hits.Hits{
+			if Find(arrOfIds,hit.ID) == true{
+				continue
+			} else{
+			latFrom:=latOrigin
+			lonFrom:=longOrigin
+			latTo:=hit.Source.Latitude
+			lonTo:=hit.Source.Longitude
+			var deltaLat = (latTo - latFrom) * (math.Pi / 180)
+			var deltaLon = (lonTo - lonFrom) * (math.Pi / 180)
+			
+			var a = math.Sin(deltaLat / 2) * math.Sin(deltaLat / 2) + 
+				math.Cos(latFrom * (math.Pi / 180)) * math.Cos(latTo * (math.Pi / 180)) *
+				math.Sin(deltaLon / 2) * math.Sin(deltaLon / 2)
+			var c = 2 * math.Atan2(math.Sqrt(a),math.Sqrt(1-a))
+			
+			distance := earthRadius * c
+			if distance < minVal {
+				minVal = distance
+				k=i
+			}
+		 }
+		}
+		arrOfIds=append(arrOfIds,res.Hits.Hits[k].ID)
+		arrOfDistance=append(arrOfDistance,minVal)
+		latOrigin =res.Hits.Hits[k].Source.Latitude
+		longOrigin=res.Hits.Hits[k].Source.Longitude
+	}
+	return arrOfIds	
+}
+
+func Find(slice []string, val string)  bool {
+    for _, item := range slice {
+        if item == val {
+            return true
+        }
+    }
+    return false
 }

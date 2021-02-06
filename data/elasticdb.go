@@ -256,7 +256,7 @@ func FetchAllDeliveryES(key string,docID string) DeliveryResponseBulk {
 
 	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=500", "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=1000", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {
@@ -278,7 +278,7 @@ func FetchAllDeliveryES(key string,docID string) DeliveryResponseBulk {
 	return deliveries
 }
 
-func FetchPendingDeliveryByAgentIdES(key string,docID string) DeliveryResponseBulk {
+func FetchPendingDeliveryByAgentIdES(key string,docID string) *DeliveryResponseBulk {
 	var deliveries DeliveryResponseBulk
 
 	postBody:=`{
@@ -294,7 +294,7 @@ func FetchPendingDeliveryByAgentIdES(key string,docID string) DeliveryResponseBu
 
 	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=500", "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=1000", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {
@@ -313,7 +313,7 @@ func FetchPendingDeliveryByAgentIdES(key string,docID string) DeliveryResponseBu
 		log.Error("json.Unmarshal ERROR : ")
 		log.Error(err)
     	} 
-	return deliveries
+	return &deliveries
 }
 
 func FetchDeliveryHistoryByAgentIdES(key string,docID string) DeliveryResponseBulk {
@@ -334,7 +334,7 @@ func FetchDeliveryHistoryByAgentIdES(key string,docID string) DeliveryResponseBu
 
 	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=500", "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=1000", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {

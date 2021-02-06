@@ -339,6 +339,9 @@ type DeliveryResponseBulk struct {
 			} `json:"_source"`
 		} `json:"hits"`
 	} `json:"hits"`
+
+	//Sorted Array of Delivery IDs
+	SortedIdArray []string
 }
 
 //post response
@@ -377,6 +380,11 @@ type ResponseFromMapAPI struct {
 		} `json:"geometry"`
 	} `json:"results"`
 	Status string `json:"status"`
+}
+
+type LatLongOfBusiness struct {
+	Latitude float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 }
 
 func (d *AddDeliveryRequestWithGeoCode) ValidateAddDelivery() error {

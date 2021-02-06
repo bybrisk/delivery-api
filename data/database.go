@@ -156,3 +156,18 @@ func GetDeliveryFrequency (docID string) *DeliveryCountStatus {
 	}
 	return count
 }
+
+func GetGeocodes (docID string) LatLongOfBusiness {
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	filter := bson.M{"_id": id}
+
+	var document LatLongOfBusiness
+
+	err:= collectionName.FindOne(shashankMongo.CtxForDB, filter).Decode(&document)
+	if err != nil {
+		log.Error("GetGeocodes ERROR:")
+		log.Error(err)
+	}
+	return document
+}
