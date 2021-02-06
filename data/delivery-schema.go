@@ -341,7 +341,7 @@ type DeliveryResponseBulk struct {
 	} `json:"hits"`
 
 	//Sorted Array of Delivery IDs
-	SortedIdArray []string
+	SortedIdArray []string `json:"sortedIdArray"`
 }
 
 //post response
