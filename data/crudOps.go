@@ -96,6 +96,10 @@ func UpdateDeliveryStatusCO(d *UpdateDeliveryStatus) *DeliveryPostSuccess {
 	//Fetch frequency of this status 
 	count:=GetDeliveryFrequency(d.BybID)
 
+	if (d.DeliveryStatus=="Pending"){
+		_=DecreaseTransitDelivery(d.BybID,count.DeliveryTransit)
+		_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
+	}
 	if (d.DeliveryStatus=="Transit"){
 		_=DecreasePendingDelivery(d.BybID,count.DeliveryPending)
 		_=UpdateTransitDelivery(d.BybID,count.DeliveryTransit)

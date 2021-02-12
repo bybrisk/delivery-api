@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	"fmt"
+	//"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -46,14 +46,14 @@ import (
 	}
 }*/
 
-/*func TestUpdateDeliveryStatusCO(t *testing.T) {
+func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
-		BybID:"6011acbee549b5b2e5ce2ce0",
-		DeliveryID: "o4YYRXcBMbaQ18HIx4w-",
-		DeliveryStatus: "Pending-Cancelled",
+		BybID:"6017ae0e5b706f00e918d040",
+		DeliveryID: "J4aIlHcBMbaQ18HIT5uq",
+		DeliveryStatus: "Pending",
 	}
 	_= data.UpdateDeliveryStatusCO(update)
-}*/
+}
 
 /*func TestGetAllDeliveries(t *testing.T) {
 	res:= data.GetAllDeliveryByBybID("6013bc1aeef443c14c31f250")
@@ -65,10 +65,10 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestGetPendingDeliveryByAgentID(t *testing.T){
+/*func TestGetPendingDeliveryByAgentID(t *testing.T){
 	res := data.GetAgentPendingDelivery("601a9e411b66a92ffc0f1cf2")
 	fmt.Println(res)
-}
+}*/
 
 /*func TestGetDeliveryHistory(t *testing.T) {
 	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")
