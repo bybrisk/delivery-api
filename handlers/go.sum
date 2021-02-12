@@ -1,8 +1,10 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/+8rV9s48=
-github.com/bybrisk/delivery-api v0.0.0-20210206044133-6f7c1cb23570 h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
-github.com/bybrisk/delivery-api/data v0.0.0-20210206044133-6f7c1cb23570 h1:uycKGfDY58ncYQcBJulAVFkVbTzuUPFwgs8bMT/zycM=
-github.com/bybrisk/delivery-api/data v0.0.0-20210206044133-6f7c1cb23570/go.mod h1:nddDzJfPEwnswfEq+aeF/o2yHx1PkOa+Z1/K5kIb7gg=
+github.com/bybrisk/delivery-api v0.0.0-20210206045333-325c5960e35c h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+github.com/bybrisk/delivery-api/data v0.0.0-20210206045333-325c5960e35c h1:iUHVvc67lx/XndkpjNZeRyR4kz5OHuniRbFb2q26+f4=
+github.com/bybrisk/delivery-api/data v0.0.0-20210206045333-325c5960e35c/go.mod h1:nddDzJfPEwnswfEq+aeF/o2yHx1PkOa+Z1/K5kIb7gg=
+github.com/bybrisk/delivery-api/data v0.0.0-20210212175612-714eca6d492d h1:DfhydTgT2WGsd5SFogxwEH9yTB5Vc4AGTzrBJqnLCIg=
+github.com/bybrisk/delivery-api/data v0.0.0-20210212175612-714eca6d492d/go.mod h1:nddDzJfPEwnswfEq+aeF/o2yHx1PkOa+Z1/K5kIb7gg=
 github.com/bybrisk/structs v0.0.0-20201109044720-899a1e012b8c/go.mod h1:+ozPcEcgRTvbDXzFyBlUTgv1G2niBpEsIzF5tySMIck=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
