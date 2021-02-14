@@ -1,12 +1,13 @@
 package data
 
-import ("log"
+import ( //"log"
 		"fmt"
 		"time"
 		"io/ioutil"
 		"net/http"
 		"net/url"
 		"encoding/json"
+		log1 "github.com/sirupsen/logrus"
 		"math"
 	)
 
@@ -37,6 +38,9 @@ func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSucc
 }
 
 func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPostSuccess {
+	var res DeliveryPostSuccess
+	var status string 
+
 	apiKey := "AIzaSyAZDoWPn-emuLvzohH3v-cS_En-u9NSA1A"
 	address := url.QueryEscape(d.CustomerAddress)
 	url :=  "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+apiKey
@@ -49,32 +53,73 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 
     responseData, err := ioutil.ReadAll(response.Body)
     if err != nil {
-        log.Fatal(err)
+		log1.Error("response from google ERROR : ")
+		log1.Error(err)
 	}
 	var responseObject ResponseFromMapAPI
 	json.Unmarshal(responseData, &responseObject)
-	d.Latitude = responseObject.Results[0].Geometry.Location.Lat
-	d.Longitude = responseObject.Results[0].Geometry.Location.Lng
+	if responseObject.Status=="OK"{
+		d.Latitude = responseObject.Results[0].Geometry.Location.Lat
+		d.Longitude = responseObject.Results[0].Geometry.Location.Lng
+
+		//Restricting address outside 15km radius (haversine)
+
+	} else {
+		fmt.Println("GeoCoding Failed")
+		//Save The response in db
+
+		//set status to GEOCODING FAILED
+		status = "GEOCODING FAILED"
+
+		//return json value.
+		res = DeliveryPostSuccess{
+			DeliveryID: "",
+			Message: status,
+		}
+		return &res
+	}
+
+	//Fetch Pending Delivery
+	count:=GetDeliveryFrequency(d.BybID)
+	//get latlong of business
+	distanceOfDelivery := distanceHaversine(count.Latitude, count.Longitude, d.Latitude, d.Longitude)
+	fmt.Println(distanceOfDelivery)
+	if (distanceOfDelivery > 15) {
+		fmt.Println("GeoCoding Failed! Address out of bound")
+		//Save The response in db
+
+		//set status to GEOCODING FAILED
+		status = "GEOCODING FAILED"
+
+		//return json value.
+		res = DeliveryPostSuccess{
+			DeliveryID: "",
+			Message: status,
+		}
+		return &res	
+	}
+
+	//Check for distance proximity
+
 	d.DeliveryStatus = "Pending"
 	
 	t2e2 := time.Now()
 	d.RankingTime = t2e2.UnixNano()
 	d.TimeStamp = t2e2.Format("2006-Jan-02 3:4:5 PM")
 
-	status := responseObject.Status
+	status = responseObject.Status
 	d.APIKey = "API"
 	d.DistanceObserved = 0
 
 	//save data to elastic search and return ID
 	Id := InsertDeilveryWithoutGeoCode(d)
 
-	//Fetch Pending Delivery
-	count:=GetDeliveryFrequency(d.BybID)
 	//update pending delivery of business account
 	_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
 
+
 	//sending response
-	var res = DeliveryPostSuccess{
+	res = DeliveryPostSuccess{
 		DeliveryID: Id,
 		Message: status,
 	}
@@ -231,4 +276,18 @@ func Find(slice []string, val string)  bool {
         }
     }
     return false
+}
+
+func distanceHaversine(latFrom float64,lonFrom float64, latTo float64, lonTo float64) float64{
+
+	var deltaLat = (latTo - latFrom) * (math.Pi / 180)
+	var deltaLon = (lonTo - lonFrom) * (math.Pi / 180)
+			
+	var a = math.Sin(deltaLat / 2) * math.Sin(deltaLat / 2) + 
+				math.Cos(latFrom * (math.Pi / 180)) * math.Cos(latTo * (math.Pi / 180)) *
+				math.Sin(deltaLon / 2) * math.Sin(deltaLon / 2)
+	var c = 2 * math.Atan2(math.Sqrt(a),math.Sqrt(1-a))
+			
+	distance := earthRadius * c
+	return distance
 }

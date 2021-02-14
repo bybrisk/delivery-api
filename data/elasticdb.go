@@ -312,7 +312,7 @@ func FetchPendingDeliveryByAgentIdES(key string,docID string) *DeliveryResponseB
 	 if err != nil {
 		log.Error("json.Unmarshal ERROR : ")
 		log.Error(err)
-    	} 
+    	}	
 	return &deliveries
 }
 

@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	//"fmt"
+	"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -28,15 +28,15 @@ import (
 	}
 }*/
 
-/*func TestAddDeliveryWithoutGeoCode(t *testing.T){
+func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
 		CustomerName : "Great Donna",
-		CustomerAddress : "Shop no.7 new shri ram parisar behind regal homes Awadpuri bhopal, Bhopal-462022, Madhya Pradesh, India",
+		CustomerAddress : "Hoshangabad, M.P",
 		Phone : "9340212623",
 		ItemWeight : 6,
 		Pincode : "800025",
 		PaymentStatus : true,	
-		BybID : "6017ae0e5b706f00e918d040",
+		BybID : "601a4c31565e622c7f6816f5",
 		Amount: 235,
 	}
 
@@ -44,16 +44,17 @@ import (
 	if res==nil{
 		t.Fail()
 	}
-}*/
+	fmt.Println(res)
+}
 
-func TestUpdateDeliveryStatusCO(t *testing.T) {
+/*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
 		BybID:"6017ae0e5b706f00e918d040",
 		DeliveryID: "J4aIlHcBMbaQ18HIT5uq",
 		DeliveryStatus: "Pending",
 	}
 	_= data.UpdateDeliveryStatusCO(update)
-}
+}*/
 
 /*func TestGetAllDeliveries(t *testing.T) {
 	res:= data.GetAllDeliveryByBybID("6013bc1aeef443c14c31f250")

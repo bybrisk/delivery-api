@@ -342,6 +342,7 @@ type DeliveryResponseBulk struct {
 
 	//Sorted Array of Delivery IDs
 	SortedIdArray []string `json:"sortedIdArray"`
+
 }
 
 //post response
@@ -367,6 +368,8 @@ type DeliveryCountStatus struct {
 	DeliveryDelivered string `json:"deliveryDelivered"`
 	DeliveryCancelled string `json: "deliveryCancelled"`
 	DeliveryTransit string `json: "deliveryTransit"`
+	Latitude float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 }
 
 //data structure to access Geocode from Google Map API
