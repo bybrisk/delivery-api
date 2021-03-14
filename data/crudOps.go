@@ -291,3 +291,7 @@ func distanceHaversine(latFrom float64,lonFrom float64, latTo float64, lonTo flo
 	distance := earthRadius * c
 	return distance
 }
+
+func createDistanceMatrix () {
+
+}
