@@ -186,9 +186,9 @@ func UpdateDeliveryAgentCO(d *UpdateDeliveryAgent) *DeliveryPostSuccess {
 func GetAllDeliveryByBybID(docID string) *DeliveryResponseBulk {
 
 	//Fetch all deliveries having similar businessID
-	res := FetchAllDeliveryES("BybID",docID)
+	result := FetchAllDeliveryES("BybID",docID)
 	
-	return &res
+	return &result
 }
 
 func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
