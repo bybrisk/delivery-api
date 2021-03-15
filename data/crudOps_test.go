@@ -8,7 +8,7 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-func TestAddDeliveryWithGeoCode(t *testing.T) {
+/*func TestAddDeliveryWithGeoCode(t *testing.T) {
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "Charan Parihar",
 		CustomerAddress : "A.G Colony, Chetna Samiti, Near Bank of Baroda, Patna, Bihar-800025",
@@ -27,7 +27,7 @@ func TestAddDeliveryWithGeoCode(t *testing.T) {
 		t.Fail()
 	}
 	fmt.Println(res)
-}
+}*/
 
 /*func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
@@ -67,10 +67,10 @@ func TestAddDeliveryWithGeoCode(t *testing.T) {
 	fmt.Println(res)
 }*/
 
-/*func TestGetPendingDeliveryByAgentID(t *testing.T){
-	res := data.GetAgentPendingDelivery("601a9e411b66a92ffc0f1cf2")
+func TestGetPendingDeliveryByAgentID(t *testing.T){
+	res := data.GetAgentPendingDelivery("603cdbf6c8cc5beed55be98b")
 	fmt.Println(res)
-}*/
+}
 
 /*func TestGetDeliveryHistory(t *testing.T) {
 	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")

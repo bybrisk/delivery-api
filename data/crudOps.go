@@ -197,7 +197,9 @@ func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
 	res := FetchPendingDeliveryByAgentIdES("deliveryAgentID",docID)
 
 	//arrange delivery IDs from the array
-	sortedIDs := GetSortedArray(res)
+	//sortedIDs := GetSortedArray(res)
+	sortedIDs := GetSortedArrayFromMongo(res.Hits.Hits[0].Source.BybID,docID)
+	fmt.Println(sortedIDs)
 	res.SortedIdArray = sortedIDs
 
 	// match the index of the array based on the deliveryIDs
@@ -292,6 +294,3 @@ func distanceHaversine(latFrom float64,lonFrom float64, latTo float64, lonTo flo
 	return distance
 }
 
-func createDistanceMatrix () {
-
-}

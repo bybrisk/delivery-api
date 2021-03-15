@@ -3,6 +3,7 @@ package data
 import (
 	"strconv"
 	//"github.com/bybrisk/structs"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"github.com/shashank404error/shashankMongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -170,4 +171,30 @@ func GetGeocodes (docID string) LatLongOfBusiness {
 		log.Error(err)
 	}
 	return document
+}
+
+func GetSortedArrayFromMongo (docID string,agentID string) []string {
+	var resStringArr []string
+	collectionName := shashankMongo.DatabaseName.Collection("cluster")
+	cursor, err := collectionName.Find(shashankMongo.CtxForDB, bson.M{"bybid":docID})
+	if err != nil {
+		log.Fatal(err)
+	}
+	var episodes []bson.M
+	if err = cursor.All(shashankMongo.CtxForDB, &episodes); err != nil {
+		log.Fatal(err)
+	}
+	newEpisodeMap:=episodes[0]["sortedArrayWithAgent"]
+
+	for _, value := range newEpisodeMap.(primitive.A) {
+		for innerKey, innerValue := range value.(primitive.M) {
+			if innerKey==agentID {
+				for _, innerMostValue := range innerValue.(primitive.A) {
+					resStringArr=append(resStringArr,fmt.Sprintf("%v", innerMostValue))
+				}
+			}
+		}
+
+	}
+	return resStringArr
 }
