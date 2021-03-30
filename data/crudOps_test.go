@@ -1,11 +1,11 @@
 package data_test
 
 import (
-	"testing"
-	"fmt"
+	//"testing"
+	//"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
-	"github.com/bybrisk/delivery-api/data"
+	//"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
@@ -67,10 +67,10 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestGetPendingDeliveryByAgentID(t *testing.T){
+/*func TestGetPendingDeliveryByAgentID(t *testing.T){
 	res := data.GetAgentPendingDelivery("603cdbf6c8cc5beed55be98b")
 	fmt.Println(res)
-}
+}*/
 
 /*func TestGetDeliveryHistory(t *testing.T) {
 	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")

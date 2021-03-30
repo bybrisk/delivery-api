@@ -3,7 +3,8 @@ github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/
 github.com/bybrisk/structs v0.0.0-20201109044720-899a1e012b8c/go.mod h1:+ozPcEcgRTvbDXzFyBlUTgv1G2niBpEsIzF5tySMIck=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/elastic/go-elasticsearch/v8 v8.0.0-20210311100734-5d6b0c808457/go.mod h1:xe9a/L2aeOgFKKgrO3ibQTnMdpAeL0GC+5/HpGScSa4=
+github.com/elastic/go-elasticsearch/v8 v8.0.0-20210317102009-a9d74cec0186 h1:F07rUXGNyhzJZKXI08EI/eAURqzhDqoRSdb//R+BOx4=
+github.com/elastic/go-elasticsearch/v8 v8.0.0-20210317102009-a9d74cec0186/go.mod h1:xe9a/L2aeOgFKKgrO3ibQTnMdpAeL0GC+5/HpGScSa4=
 github.com/go-playground/assert/v2 v2.0.1/go.mod h1:VDjEfimB/XKnb+ZQfWdccd7VUvScMdVu0Titje2rxJ4=
 github.com/go-playground/locales v0.13.0/go.mod h1:taPMhCMXrRLJO55olJkUXHZBHCxTMfnGwq/HNwmWNS8=
 github.com/go-playground/universal-translator v0.17.0/go.mod h1:UkSxE5sNxxRwHyU+Scu5vgOQjsIJAF8j9muTVoKLVtA=

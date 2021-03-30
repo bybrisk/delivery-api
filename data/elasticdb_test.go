@@ -17,7 +17,7 @@ import (
 		PaymentStatus : true,
 		Latitude : 23.4594578,
 		Longitude : 77.47784784,	
-		BybID : "5fff310b00a7284754cd9b57",
+		BybID : "6038bd0fc35e3b8e8bd9f81a",
 	}
 
 	_ = data.AddDeliveryWithGeoCode(delivery)
@@ -53,7 +53,7 @@ FetchAllDeliveryESincode : "800025",
 }*/
 
 /*func TestGetAllDeliveries(t *testing.T){
-	res:= data.FetchAllDeliveryES("6005bfcb53b27c07c1539ea8")
+	res:= data.FetchAllDeliveryES("BybID","6038bd0fc35e3b8e8bd9f81a")
 	fmt.Println(res)
 }*/
 
