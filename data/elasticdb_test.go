@@ -1,9 +1,9 @@
 package data_test
 
 import (
-	//"testing"
-	//"fmt"
-	//"github.com/bybrisk/delivery-api/data"
+	"testing"
+	"fmt"
+	"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestInsertDeilveryWithGeoCode(t *testing.T) {
@@ -26,19 +26,28 @@ import (
 
 /*func TestUpdateDeliveryStatus(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
-		BybID:"6005bfcb53b27c07c1539ea8",
-		DeliveryID: "fKJpMHcBp6NVLwShJKif",
+		BybID:"6038bd0fc35e3b8e8bd9f81a",
+		DeliveryID: "F7cng3gBsGM1IID4S8zs",
 		DeliveryStatus: "Transit",
 	}
 
-	_=data.UpdateDeilveryStatusES(update)
+	res:=data.UpdateDeilveryStatusES(update)
+	fmt.Println(res)
 }*/
 
-/*func TestUpdateDeliveryAgent(t *testing.T) {
-	updatFetchAllDeliveryES
+/*func TestUpdateDeilveryAgentES(t *testing.T) {
+	update := &data.UpdateDeliveryAgent{
+		DeliveryID: "F7cng3gBsGM1IID4S8zs",
+		DeliveryAgentID: "603b496dc35e3b8e8bd9f83a",
+	}
 
-func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
-FetchAllDeliveryESincode : "800025",
+	res:=data.UpdateDeilveryAgentES(update)
+	fmt.Println(res)
+}*/
+
+
+/*func TestInsertDeilveryWithoutGeoCode(t *testing.T) {
+	FetchAllDeliveryESincode : "800025",
 		PaymentStatus : true,	
 		BybID : "5ffc9e2d0a550230dc5e26a3",
 	}
@@ -48,7 +57,7 @@ FetchAllDeliveryESincode : "800025",
 }*/
 
 /*func TestSearchDocument(t *testing.T) {
-	res := data.FetchDeliveryByID("f4c17XYBAsHKFtIUy7yb")
+	res := data.FetchDeliveryByID("F7cng3gBsGM1IID4S8zs")
 	fmt.Println(res)
 }*/
 
@@ -57,10 +66,11 @@ FetchAllDeliveryESincode : "800025",
 	fmt.Println(res)
 }*/
 
-/*func TestDeliveryDistance(t *testing.T){
+func TestDeliveryDistance(t *testing.T){
 	update := &data.UpdateDeliveryDistance{
-		DeliveryID: "GIZ0T3cBMbaQ18HIq41k",
+		DeliveryID: "F7cng3gBsGM1IID4S8zs",
 		Distance: 12345,
 	}
-	_=data.UpdateDeilveryDistanceES(update)
-}*/
+	res:=data.UpdateDeilveryDistanceES(update)
+	fmt.Println(res)
+}
