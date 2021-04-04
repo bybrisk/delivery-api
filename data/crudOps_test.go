@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	//"fmt"
+	"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -68,8 +68,8 @@ import (
 }*/
 
 func TestGetPendingDeliveryByAgentID(t *testing.T){
-	_ = data.GetAgentPendingDelivery("6038bd71c35e3b8e8bd9f81c")
-	//fmt.Println(res)
+	res:= data.GetAgentPendingDelivery("6038bd71c35e3b8e8bd9f81c")
+	fmt.Println(res)
 }
 
 /*func TestGetDeliveryHistory(t *testing.T) {

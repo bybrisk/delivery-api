@@ -1,9 +1,9 @@
 package data_test
 
 import (
-	"testing"
-	"fmt"
-	"github.com/bybrisk/delivery-api/data"
+	//"testing"
+	//"fmt"
+	//"github.com/bybrisk/delivery-api/data"
 )
 
 /*func TestInsertDeilveryWithGeoCode(t *testing.T) {
@@ -66,11 +66,11 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestDeliveryDistance(t *testing.T){
+/*func TestDeliveryDistance(t *testing.T){
 	update := &data.UpdateDeliveryDistance{
 		DeliveryID: "F7cng3gBsGM1IID4S8zs",
 		Distance: 12345,
 	}
 	res:=data.UpdateDeilveryDistanceES(update)
 	fmt.Println(res)
-}
+}*/
