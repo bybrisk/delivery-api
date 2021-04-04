@@ -3,7 +3,7 @@ package data
 import (
 	"strconv"
 	//"github.com/bybrisk/structs"
-	"fmt"
+	//"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"github.com/shashank404error/shashankMongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -173,7 +173,7 @@ func GetGeocodes (docID string) LatLongOfBusiness {
 	return document
 }
 
-func GetSortedArrayFromMongo (docID string,agentID string) []string {
+/*func GetSortedArrayFromMongo (docID string,agentID string) []string {
 	var resStringArr []string
 	collectionName := shashankMongo.DatabaseName.Collection("cluster")
 	cursor, err := collectionName.Find(shashankMongo.CtxForDB, bson.M{"bybid":docID})
@@ -197,4 +197,26 @@ func GetSortedArrayFromMongo (docID string,agentID string) []string {
 
 	}
 	return resStringArr
+}*/
+
+func GetSortedArrayOfIdsObjMongo(docID string,agentID string) []DeliveryWithTimeAndDistance {
+	collectionName := shashankMongo.DatabaseName.Collection("cluster")
+	filter := bson.M{"bybid": docID}
+
+	var document ExtractTimeAndDistanceFromMongo
+	var result []DeliveryWithTimeAndDistance
+
+	err:= collectionName.FindOne(shashankMongo.CtxForDB, filter).Decode(&document)
+	if err != nil {
+		log.Error("GetGeocodes ERROR:")
+		log.Error(err)
+	}
+
+	for _,v:=range document.DeliveryDetailObj{
+		if v.AgentID==agentID {
+			result=v.ArrayOfDeliveryDetail
+		}
+	}
+
+	return result
 }

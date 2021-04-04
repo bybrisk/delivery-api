@@ -130,7 +130,6 @@ func GetOneDelivery(docID string) *SingleDeliveryDetail {
 
 	//Fetch the document from elastic search queue
 	res := FetchDeliveryByID(docID)
-
 	return &res
 }
 
@@ -198,9 +197,9 @@ func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
 
 	//arrange delivery IDs from the array
 	//sortedIDs := GetSortedArray(res)
-	sortedIDs := GetSortedArrayFromMongo(res.Hits.Hits[0].Source.BybID,docID)
-	fmt.Println(sortedIDs)
-	res.SortedIdArray = sortedIDs
+	sortedIdObjArr := GetSortedArrayOfIdsObjMongo(res.Hits.Hits[0].Source.BybID,docID)
+	//fmt.Println(sortedIdObjArr)
+	res.SortedIdArray = sortedIdObjArr
 
 	// match the index of the array based on the deliveryIDs
 

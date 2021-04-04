@@ -341,8 +341,23 @@ type DeliveryResponseBulk struct {
 	} `json:"hits"`
 
 	//Sorted Array of Delivery IDs
-	SortedIdArray []string `json:"sortedIdArray"`
+	SortedIdArray []DeliveryWithTimeAndDistance `json:"sortedIdArray"`
 
+}
+
+type DeliveryWithTimeAndDistance struct{
+	DeliveryID string `json:"deliveryId"`
+	Distance int64 `json:"distance"`
+	Time int64 `json:"time"`
+}
+
+type MongoStructForTimeAndDistance struct{
+	ArrayOfDeliveryDetail []DeliveryWithTimeAndDistance `json:"arrayOfDeliveryDetail"`
+	AgentID string `json:"agentID"` 
+}
+
+type ExtractTimeAndDistanceFromMongo struct{
+	DeliveryDetailObj []MongoStructForTimeAndDistance `json:"deliveryDetailObj"`
 }
 
 //post response
