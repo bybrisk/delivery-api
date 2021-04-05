@@ -3,7 +3,7 @@ package data
 import (
 	"strconv"
 	//"github.com/bybrisk/structs"
-	//"fmt"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"github.com/shashank404error/shashankMongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -173,7 +173,7 @@ func GetGeocodes (docID string) LatLongOfBusiness {
 	return document
 }
 
-/*func GetSortedArrayFromMongo (docID string,agentID string) []string {
+func GetSortedArrayFromMongo (docID string,agentID string) []string {
 	var resStringArr []string
 	collectionName := shashankMongo.DatabaseName.Collection("cluster")
 	cursor, err := collectionName.Find(shashankMongo.CtxForDB, bson.M{"bybid":docID})
@@ -197,7 +197,7 @@ func GetGeocodes (docID string) LatLongOfBusiness {
 
 	}
 	return resStringArr
-}*/
+}
 
 func GetSortedArrayOfIdsObjMongo(docID string,agentID string) []DeliveryWithTimeAndDistance {
 	collectionName := shashankMongo.DatabaseName.Collection("cluster")

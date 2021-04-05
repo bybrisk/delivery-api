@@ -198,8 +198,10 @@ func GetAgentPendingDelivery(docID string) *DeliveryResponseBulk{
 	//arrange delivery IDs from the array
 	//sortedIDs := GetSortedArray(res)
 	sortedIdObjArr := GetSortedArrayOfIdsObjMongo(res.Hits.Hits[0].Source.BybID,res.Hits.Hits[0].Source.ClusterID)
+	sortedIdString:=GetSortedArrayFromMongo(res.Hits.Hits[0].Source.BybID,docID)
 	//fmt.Println(sortedIdObjArr)
 	res.SortedIdArray = sortedIdObjArr
+	res.SortedIdString = sortedIdString
 
 	// match the index of the array based on the deliveryIDs
 

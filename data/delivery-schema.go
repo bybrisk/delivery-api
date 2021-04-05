@@ -342,6 +342,7 @@ type DeliveryResponseBulk struct {
 
 	//Sorted Array of Delivery IDs
 	SortedIdArray []DeliveryWithTimeAndDistance `json:"sortedIdArray"`
+	SortedIdString []string `json:"SortedIdString"`
 
 }
 
