@@ -220,3 +220,14 @@ func GetSortedArrayOfIdsObjMongo(docID string,agentID string) []DeliveryWithTime
 
 	return result
 }
+
+func DeleteDeliveryFromMongo(docID string)int64{
+	collectionName := shashankMongo.DatabaseName.Collection("cluster")
+	filter := bson.M{"bybid": docID}
+	updateResult, err := collectionName.UpdateOne(shashankMongo.CtxForDB, filter, bson.M{"$unset":bson.M{"currentClusterArr": 1,"sortedArrayWithAgent":1}})
+	if err != nil {
+		log.Error("DeleteDeliveryFromMongo ERROR:")
+		log.Error(err)
+	}
+	return updateResult.ModifiedCount
+}

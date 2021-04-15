@@ -367,6 +367,12 @@ type DeliveryPostSuccess struct {
 	Message string `json:"message"`
 }
 
+//post delete response
+type DeleteAllDeliveryPostSuccess struct {
+	BusinessID string `json:"businessID"`
+	Message string `json:"message"`
+}
+
 type UpdateDeliveryDistance struct {
 	// DeliveryID of the Delivery in which you want to update the distance 
 	//

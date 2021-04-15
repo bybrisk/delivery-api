@@ -295,3 +295,14 @@ func distanceHaversine(latFrom float64,lonFrom float64, latTo float64, lonTo flo
 	return distance
 }
 
+func DeleteAllDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
+
+	_= DeleteDeliveryFromES(docID)
+	_=DeleteDeliveryFromMongo(docID)
+	response := DeleteAllDeliveryPostSuccess{
+		BusinessID: docID,
+		Message: "All Delivery Deleted Successfully!",
+	}
+
+	return &response
+} 

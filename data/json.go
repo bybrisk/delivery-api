@@ -44,3 +44,8 @@ func (d *DeliveryResponseBulk) GetAllDeliveryResultToJSON (w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
+
+func (d *DeleteAllDeliveryPostSuccess) DeleteAllDeliveryPostSuccessToJSON (w io.Writer) error {
+	e := json.NewEncoder(w)
+	return e.Encode(d)
+}

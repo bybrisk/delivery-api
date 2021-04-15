@@ -390,6 +390,36 @@ func UpdateDeilveryDistanceES(d *UpdateDeliveryDistance) string{
 		id=fmt.Sprintf("%v", r["updated"])
     }
 
-	fmt.Println(id)
+	return id	
+}
+
+func DeleteDeliveryFromES(docID string) string{
+	var id string
+	//Encode the data
+	postBody:=`{
+		"query": {
+		  "match": {
+			"BybID": "`+docID+`"
+		  }
+		}
+	  }`
+
+	 responseBody := bytes.NewBufferString(postBody)
+  	//Leverage Go's HTTP Post function to make request
+	 resp, err := http.Post(urlAuthenticate+awsYearIndex+"/_delete_by_query", "application/json", responseBody)
+  
+	 //Handle Error
+	 if err != nil {
+		log.Fatalf("An Error Occured %v", err)
+	 }
+	 defer resp.Body.Close()
+
+	var r map[string]interface{}
+    if err := json.NewDecoder(resp.Body).Decode(&r); err != nil {
+    	log.Printf("Error parsing the response body: %s", err)
+    } else {
+    	// Print the response status and indexed document version.
+		id=fmt.Sprintf("%v", r["deleted"])
+    }
 	return id	
 }

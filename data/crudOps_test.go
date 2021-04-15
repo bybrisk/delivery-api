@@ -67,10 +67,10 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestGetPendingDeliveryByAgentID(t *testing.T){
+/*func TestGetPendingDeliveryByAgentID(t *testing.T){
 	res:= data.GetAgentPendingDelivery("6055ee0801bf19a9a89c9e72")
 	fmt.Println(res)
-}
+}*/
 
 /*func TestGetDeliveryHistory(t *testing.T) {
 	res:= data.GetAgentDeliveryHistory("601401c24b06c2a9342b3017")
@@ -84,3 +84,8 @@ func TestGetPendingDeliveryByAgentID(t *testing.T){
 	}
 	_=data.UpdateDeliveryDistanceCO(update)
 }*/
+
+func TestDeleteDelivery(t *testing.T){
+	res:=data.DeleteAllDeliveryByBybID("6038bd0fc35e3b8e8bd9f81a")
+	fmt.Println(res)
+}

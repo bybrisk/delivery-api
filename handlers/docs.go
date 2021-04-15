@@ -50,6 +50,14 @@ type accountPostResponseWrapper struct {
 	Body data.DeliveryPostSuccess
 }
 
+// Success message on all Delivery deletion
+// swagger:response deleteAllDeliveryDetail
+type DeleteDeliveryPostResponseWrapper struct {
+	// Success message on newly added delivery
+	// in: body
+	Body data.DeleteAllDeliveryPostSuccess
+}
+
 // swagger:parameters addDeliveryWithGeocords
 type createAccountParamsWrapper struct {
 	// Delivery data structure to add delivery with Geocode.
