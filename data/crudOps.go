@@ -24,9 +24,9 @@ func AddDeliveryWithGeoCode (d *AddDeliveryRequestWithGeoCode) *DeliveryPostSucc
 	res := InsertDeilveryWithGeoCode(d)
 
 	//Fetch Pending Delivery
-	count:=GetDeliveryFrequency(d.BybID)
+	//count:=GetDeliveryFrequency(d.BybID)
 	//update pending delivery of business account
-	_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
+	//_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
 
 	//sending response
 	var response = DeliveryPostSuccess{
@@ -84,7 +84,7 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	//get latlong of business
 	distanceOfDelivery := distanceHaversine(count.Latitude, count.Longitude, d.Latitude, d.Longitude)
 	fmt.Println(distanceOfDelivery)
-	if (distanceOfDelivery > 15) {
+	if (distanceOfDelivery > 35) {
 		fmt.Println("GeoCoding Failed! Address out of bound")
 		//Save The response in db
 
@@ -115,7 +115,7 @@ func AddDeliveryWithoutGeoCode (d *AddDeliveryRequestWithoutGeoCode) *DeliveryPo
 	Id := InsertDeilveryWithoutGeoCode(d)
 
 	//update pending delivery of business account
-	_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
+	//_=UpdatePendingDelivery(d.BybID,count.DeliveryPending)
 
 
 	//sending response

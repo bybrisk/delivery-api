@@ -10,7 +10,7 @@ import (
 
 /*func TestAddDeliveryWithGeoCode(t *testing.T) {
 	delivery := &data.AddDeliveryRequestWithGeoCode{
-		CustomerName : "Charan Parihar",
+		CustomerName : "Delivery New123",
 		CustomerAddress : "A.G Colony, Chetna Samiti, Near Bank of Baroda, Patna, Bihar-800025",
 		Phone : "9340212623",
 		ItemWeight : 4,
@@ -29,13 +29,13 @@ import (
 	fmt.Println(res)
 }*/
 
-/*func TestAddDeliveryWithoutGeoCode(t *testing.T){
+func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
 		CustomerName : "Great Donna",
-		CustomerAddress : "Hoshangabad, M.P",
+		CustomerAddress : "Maulana Azad National Institute of Technology, Bhopal",
 		Phone : "9340212623",
 		ItemWeight : 6,
-		Pincode : "800025",
+		Note : "Hi its working fine",
 		PaymentStatus : true,	
 		BybID : "6038bd0fc35e3b8e8bd9f81a",
 		Amount: 235,
@@ -46,9 +46,9 @@ import (
 		t.Fail()
 	}
 	fmt.Println(res)
-}*/
+}
 
-func TestUpdateDeliveryStatusCO(t *testing.T) {
+/*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
 		BybID:"6038bd0fc35e3b8e8bd9f81a",
 		DeliveryID: "fLfuLHkBRcNvo2afTBml",
@@ -56,7 +56,7 @@ func TestUpdateDeliveryStatusCO(t *testing.T) {
 	}
 	res:= data.UpdateDeliveryStatusCO(update)
 	fmt.Println(res)
-}
+}*/
 
 /*func TestGetAllDeliveries(t *testing.T) {
 	res:= data.GetAllDeliveryByBybID("6013bc1aeef443c14c31f250")
