@@ -30,10 +30,10 @@ type AddDeliveryRequestWithGeoCode struct{
 	// required: true
 	ItemWeight float64 `json:"itemWeight" validate:"required"`
 	
-	// Pincode of the customer (specify for better agent allocation and optimization.)
+	// note for the delivery agent
 	//
-	// required: true
-	Pincode string `json:"pincode" validate:"required"`
+	// required: false
+	Note string `json:"note"`
 	
 	// Status of the payment made by the customer (true or false) - Payment done or not
 	//
@@ -115,10 +115,10 @@ type AddDeliveryRequestWithoutGeoCode struct{
 	// required: true
 	ItemWeight float64 `json:"itemWeight" validate:"required"`
 	
-	// Pincode of the customer (specify for better agent allocation and optimization.)
+	// note for the delivery agent
 	//
-	// required: true
-	Pincode string `json:"pincode" validate:"required"`
+	// required: false
+	Note string `json:"note"`
 	
 	// Status of the payment made by the customer (true or false)
 	//
@@ -195,9 +195,9 @@ type SingleDeliveryDetail struct {
 	//
 	ItemWeight float64 `json:"itemWeight"`
 	
-	// Pincode of the customer (specify for better agent allocation and optimization.)
+	// note for the delivery agent
 	//
-	Pincode string `json:"pincode"`
+	Note string `json:"note"`
 	
 	// Status of the payment made by the customer (true or false)
 	//
@@ -281,9 +281,9 @@ type DeliveryResponseBulk struct {
 			//Delivery details
 			//
 			Source struct {
-				//Pincode of delivery location
+				// note for the delivery agent
 				//
-				Pincode         string  `json:"pincode"`
+				Note string `json:"note"`
 
 				//API Key used in the delivery
 				//

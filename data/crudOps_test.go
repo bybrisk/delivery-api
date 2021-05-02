@@ -8,13 +8,13 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-/*func TestAddDeliveryWithGeoCode(t *testing.T) {
+func TestAddDeliveryWithGeoCode(t *testing.T) {
 	delivery := &data.AddDeliveryRequestWithGeoCode{
 		CustomerName : "Charan Parihar",
 		CustomerAddress : "A.G Colony, Chetna Samiti, Near Bank of Baroda, Patna, Bihar-800025",
 		Phone : "9340212623",
 		ItemWeight : 4,
-		Pincode : "800025",
+		Note : "Faster than light",
 		PaymentStatus : false,
 		Latitude : 23.235423,
 		Longitude : 77.434573,	
@@ -27,7 +27,7 @@ import (
 		t.Fail()
 	}
 	fmt.Println(res)
-}*/
+}
 
 /*func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
@@ -85,7 +85,7 @@ import (
 	_=data.UpdateDeliveryDistanceCO(update)
 }*/
 
-func TestDeleteDelivery(t *testing.T){
-	res:=data.DeleteAllDeliveryByBybID("6038bd0fc35e3b8e8bd9f81a")
+/*func TestDeleteDelivery(t *testing.T){
+	res:=data.DeleteAllDeliveryByBybID("607893f544956a457f5f2756")
 	fmt.Println(res)
-}
+}*/
