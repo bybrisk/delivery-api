@@ -59,22 +59,24 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 
     // Prints the names and majors of students in a sample spreadsheet:
     // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-    spreadsheetId := "1F1FdtaJJVR2Mc2vfunPV_99Hp6ulq4U5lIKWEo-0qeA"
-    readRange := "Sheet1!A2:C30"
-    resp, err := srv.Spreadsheets.Values.Get(spreadsheetId, readRange).Do()
-        if err != nil {
-                log.Fatalf("Unable to retrieve data from sheet: %v", err)
-        }
+	//Get the data from elasticSearch
 
-        if len(resp.Values) == 0 {
-                fmt.Println("No data found.")
-        } else {
-                fmt.Println("Name, Major:")
-                for _, row := range resp.Values {
-                        // Print columns A and E, which correspond to indices 0 and 4.
-                        fmt.Printf("%s, %s\n", row[0], row[2])
-                }
-        }
+	dataFromES := FetchAllDeliveryES("BybID",docID)
+
+    spreadsheetId := "1yVLpi-mMKD5GQpzgayHaQqQqD6Qx9xXnb3vf-kU0h-c"
+    writeRange := "Sheet1!A2"
+    
+	var vr sheets.ValueRange
+	
+	for _,v := range dataFromES.Hits.Hits{
+		myval := []interface{}{v.ID, v.Source.CustomerName, v.Source.CustomerAddress, v.Source.Phone, v.Source.Note, v.Source.ItemWeight, v.Source.PaymentStatus, v.Source.Latitude, v.Source.Longitude}
+		vr.Values = append(vr.Values, myval)
+	}
+
+    _, err = srv.Spreadsheets.Values.Update(spreadsheetId, writeRange, &vr).ValueInputOption("RAW").Do()
+    if err != nil {
+        log.Fatalf("Unable to retrieve data from sheet. %v", err)
+    }
 
 }
 
