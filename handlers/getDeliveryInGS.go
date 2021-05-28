@@ -3,7 +3,7 @@ package handlers
 
 import (
 	"net/http"
-	//"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 	"fmt"
 	"encoding/base64"
 	"encoding/json"
@@ -22,17 +22,11 @@ func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 
 	state := r.URL.Query().Get("state")
 
-	type GoogleSheetStructDir struct{
-		Id string `json:"id"`
-	}
-
 	sDec, _ := base64.StdEncoding.DecodeString(state)
-    fmt.Println(string(sDec))
 
-	request := GoogleSheetStructDir{}
+	request := data.GoogleSheetStructDir{}
 
 	json.Unmarshal(sDec, &request)
-	fmt.Println("working till here")
 	fmt.Println(request.Id)
 
 	/*lp := data.GetAgentPendingDelivery(id)
