@@ -3,7 +3,6 @@ package handlers
 
 import (
 	"net/http"
-	"github.com/gorilla/mux"
 	//"github.com/bybrisk/delivery-api/data"
 	"fmt"
 )
@@ -19,10 +18,9 @@ import (
 func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> delivery-api Module")
 
-	vars := mux.Vars(r)
-	id := vars["businessID"]
+	state := r.URL.Query().Get("state")
 
-	fmt.Println(id)
+	fmt.Println(state)
 
 	/*lp := data.GetAgentPendingDelivery(id)
 
