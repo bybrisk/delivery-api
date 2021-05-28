@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-// swagger:route GET /delivery/print/callback delivery printOrdersToSheetCallback
+// swagger:route GET /delivery/callback delivery printOrdersToSheetCallback
 // Print all orders of business to google sheets callback function.
 //
 // responses:
