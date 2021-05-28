@@ -3,7 +3,7 @@ package handlers
 
 import (
 	"net/http"
-	//"github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 	//"github.com/bybrisk/delivery-api/data"
 	"golang.org/x/oauth2"
 	"encoding/base64"
@@ -31,7 +31,7 @@ func (p *Delivery) PrintOrdersToSheetOAuth (w http.ResponseWriter, r *http.Reque
 
 	sEnc := base64.StdEncoding.EncodeToString([]byte(Data))
 
-	oauthStateString = sEnc
+	oauthStateString := sEnc
 
 	url := googleOauthConfig.AuthCodeURL(oauthStateString)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)

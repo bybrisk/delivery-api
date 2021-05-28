@@ -44,6 +44,8 @@ github.com/bybrisk/delivery-api/data v0.0.0-20210528112004-78f98e806b70 h1:N9VsV
 github.com/bybrisk/delivery-api/data v0.0.0-20210528112004-78f98e806b70/go.mod h1:j6O3rIa+NZGp40X7zIgcClGNvIwvHFePJ5l9FiAkx/c=
 github.com/bybrisk/delivery-api/data v0.0.0-20210528114340-58a712a23d51 h1:VOqgtDXE276zg7ctNlGDUjvtdAA20uJ3dlskhikA5vA=
 github.com/bybrisk/delivery-api/data v0.0.0-20210528114340-58a712a23d51/go.mod h1:j6O3rIa+NZGp40X7zIgcClGNvIwvHFePJ5l9FiAkx/c=
+github.com/bybrisk/delivery-api/data v0.0.0-20210528120325-6730f822d08b h1:Ewn9BKIYnH4ile9JOlUmQSaFLRjixBKB9YuR0Z1lF+c=
+github.com/bybrisk/delivery-api/data v0.0.0-20210528120325-6730f822d08b/go.mod h1:j6O3rIa+NZGp40X7zIgcClGNvIwvHFePJ5l9FiAkx/c=
 github.com/bybrisk/structs v0.0.0-20201109044720-899a1e012b8c/go.mod h1:+ozPcEcgRTvbDXzFyBlUTgv1G2niBpEsIzF5tySMIck=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
