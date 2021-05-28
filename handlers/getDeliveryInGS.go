@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"github.com/bybrisk/delivery-api/data"
+	"golang.org/x/oauth2"
+	"fmt"
+	"golang.org/x/oauth2/google"
 )
 
 // swagger:route GET /delivery/print/{businessID} delivery printOrdersToSheet
@@ -17,14 +20,23 @@ import (
 
 func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> delivery-api Module")
-	
-	vars := mux.Vars(r)
-	id := vars["businessID"]
 
-	 data.PrintOrderToSheetCrudOps(id)
+	url := googleOauthConfig.AuthCodeURL(oauthStateString)
+	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
+}
 
-	/*err := lp.GetAllDeliveryResultToJSON(w)
-	if err!=nil {
-		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
-	}*/
+var (
+	googleOauthConfig *oauth2.Config
+	// TODO: randomize it
+	oauthStateString = "pseudo-random"
+)
+
+func init() {
+	googleOauthConfig = &oauth2.Config{
+		RedirectURL:  "http://localhost:8080/docs",
+		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
+		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
+		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
+		Endpoint:     google.Endpoint,
+	}
 }
