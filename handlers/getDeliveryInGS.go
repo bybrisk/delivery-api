@@ -5,6 +5,8 @@ import (
 	"net/http"
 	//"github.com/bybrisk/delivery-api/data"
 	"fmt"
+	"encoding/base64"
+	"reflect"
 )
 
 // swagger:route GET /delivery/callback delivery printOrdersToSheetCallback
@@ -20,7 +22,10 @@ func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 
 	state := r.URL.Query().Get("state")
 
-	fmt.Println(state)
+	sDec, _ := base64.StdEncoding.DecodeString(state)
+    fmt.Println(string(sDec))
+
+	fmt.Println(reflect.TypeOf(sDec))
 
 	/*lp := data.GetAgentPendingDelivery(id)
 
