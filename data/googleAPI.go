@@ -72,7 +72,7 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
                 fmt.Println("Name, Major:")
                 for _, row := range resp.Values {
                         // Print columns A and E, which correspond to indices 0 and 4.
-                        fmt.Printf("%s, %s\n", row[0], row[4])
+                        fmt.Printf("%s, %s\n", row[0], row[2])
                 }
         }
 
