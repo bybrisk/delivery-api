@@ -1,3 +1,4 @@
+
 package handlers
 
 import (
@@ -6,23 +7,23 @@ import (
 	"github.com/bybrisk/delivery-api/data"
 )
 
-// swagger:route GET /delivery/delete/all/{businessID} delivery deleteAllDelivery
-// Delete all deliveries by its BusinessID (BybID).
+// swagger:route GET /delivery/print/{businessID} delivery printOrdersToSheet
+// Print all orders of business to google sheets.
 //
 // responses:
-//	200: deleteAllDeliveryDetail
+//	200: printOrderResponse
 //  422: errorValidation
 //  501: errorResponse
 
-func (p *Delivery) DeleteAllDelivery(w http.ResponseWriter, r *http.Request) {
+func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> delivery-api Module")
 	
 	vars := mux.Vars(r)
 	id := vars["businessID"]
 
-	lp := data.DeletePendingDeliveryByBybID(id)
+	lp := data.PrintOrderToSheetCrudOps(id)
 
-	err := lp.DeleteAllDeliveryPostSuccessToJSON(w)
+	err := lp.GetAllDeliveryResultToJSON(w)
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
 	}

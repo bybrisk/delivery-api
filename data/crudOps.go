@@ -295,7 +295,7 @@ func distanceHaversine(latFrom float64,lonFrom float64, latTo float64, lonTo flo
 	return distance
 }
 
-func DeleteAllDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
+func DeletePendingDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
 
 	_= DeleteDeliveryFromES(docID)
 	_=DeleteDeliveryFromMongo(docID)
@@ -306,3 +306,7 @@ func DeleteAllDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
 
 	return &response
 } 
+
+func PrintOrderToSheetCrudOps (businessID string) {
+	PrintOrderToShareGoogleAPI(businessID)
+}

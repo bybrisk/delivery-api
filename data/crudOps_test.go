@@ -2,7 +2,7 @@ package data_test
 
 import (
 	"testing"
-	"fmt"
+	//"fmt"
 	//"github.com/go-playground/validator/v10"
 	//"github.com/bybrisk/structs"
 	"github.com/bybrisk/delivery-api/data"
@@ -29,7 +29,7 @@ import (
 	fmt.Println(res)
 }*/
 
-func TestAddDeliveryWithoutGeoCode(t *testing.T){
+/*func TestAddDeliveryWithoutGeoCode(t *testing.T){
     delivery := &data.AddDeliveryRequestWithoutGeoCode{
 		CustomerName : "Great Donna",
 		CustomerAddress : "Maulana Azad National Institute of Technology, Bhopal",
@@ -46,7 +46,7 @@ func TestAddDeliveryWithoutGeoCode(t *testing.T){
 		t.Fail()
 	}
 	fmt.Println(res)
-}
+}*/
 
 /*func TestUpdateDeliveryStatusCO(t *testing.T) {
 	update := &data.UpdateDeliveryStatus{
@@ -90,3 +90,7 @@ func TestAddDeliveryWithoutGeoCode(t *testing.T){
 	res:=data.DeleteAllDeliveryByBybID("607893f544956a457f5f2756")
 	fmt.Println(res)
 }*/
+
+func TestGoogleAPI(t *testing.T){
+	data.PrintOrderToShareGoogleAPI("fdbdfb")
+}
