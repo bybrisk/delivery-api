@@ -27,7 +27,7 @@ func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 
 	request := data.GoogleSheetStruct{}
 
-	json.Unmarshal([]byte(sDec), &request)
+	json.Unmarshal([]byte(string(sDec)), &request)
 	fmt.Println(request.Id)
 
 	/*lp := data.GetAgentPendingDelivery(id)
