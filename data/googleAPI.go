@@ -33,7 +33,7 @@ func init() {
 
 func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 	ctx := context.Background()
-	_, token, err := GetUserInfo(r.FormValue("state"), r.FormValue("code"))
+	_, token, err := GetUserInfo(r.FormValue("code"))
 	if err != nil {
 		log.Error("PrintOrderToShareGoogleAPI ERROR:")
 		log.Error(err)
@@ -78,10 +78,10 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 
 }
 
-func GetUserInfo(state string, code string) ([]byte, *oauth2.Token, error) {
-	if state != oauthStateString {
+func GetUserInfo(code string) ([]byte, *oauth2.Token, error) {
+	/*if state != oauthStateString {
 		return nil, nil, fmt.Errorf("invalid oauth state")
-	}
+	}*/
 
 	token, err := googleOauthConfig.Exchange(oauth2.NoContext, code)
 	if err != nil {
