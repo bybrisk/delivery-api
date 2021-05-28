@@ -6,6 +6,7 @@ import (
 	//"github.com/gorilla/mux"
 	//"github.com/bybrisk/delivery-api/data"
 	"golang.org/x/oauth2"
+	"encoding/base64"
 	//"fmt"
 	"golang.org/x/oauth2/google"
 )
@@ -21,14 +22,23 @@ import (
 func (p *Delivery) PrintOrdersToSheetOAuth (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> delivery-api Module")
 
+	vars := mux.Vars(r)
+	id := vars["businessID"]
+
+	Data := `{
+		"id":`+id+`
+	}`
+
+	sEnc := base64.StdEncoding.EncodeToString([]byte(Data))
+
+	oauthStateString = sEnc
+
 	url := googleOauthConfig.AuthCodeURL(oauthStateString)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 
 var (
 	googleOauthConfig *oauth2.Config
-	// TODO: randomize it
-	oauthStateString = "pseudo-random"
 )
 
 func init() {
