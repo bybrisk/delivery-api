@@ -4,7 +4,6 @@ package handlers
 import (
 	"net/http"
 	"github.com/bybrisk/delivery-api/data"
-	"fmt"
 	"encoding/base64"
 	"encoding/json"
 )
