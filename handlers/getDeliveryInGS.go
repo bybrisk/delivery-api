@@ -27,11 +27,10 @@ func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 	request := data.GoogleSheetStructDir{}
 
 	json.Unmarshal(sDec, &request)
-	fmt.Println(request.Id)
 
-	/*lp := data.GetAgentPendingDelivery(id)
+	data.PrintGoogleSheetCrudOps(request.Id,r)
 
-	err := lp.GetAllDeliveryResultToJSON(w)
+	/*err := lp.GetAllDeliveryResultToJSON(w)
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
 	}*/
