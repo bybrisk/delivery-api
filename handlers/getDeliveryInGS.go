@@ -3,7 +3,7 @@ package handlers
 
 import (
 	"net/http"
-	//"github.com/bybrisk/delivery-api/data"
+	"github.com/bybrisk/delivery-api/data"
 	"fmt"
 	"encoding/base64"
 	"reflect"
@@ -25,7 +25,10 @@ func (p *Delivery) PrintOrdersToSheet (w http.ResponseWriter, r *http.Request) {
 	sDec, _ := base64.StdEncoding.DecodeString(state)
     fmt.Println(string(sDec))
 
-	fmt.Println(reflect.TypeOf(sDec))
+	request := data.GoogleSheetStruct{}
+
+	json.Unmarshal([]byte(sDec), &request)
+	fmt.Println(request.Id)
 
 	/*lp := data.GetAgentPendingDelivery(id)
 

@@ -412,6 +412,10 @@ type LatLongOfBusiness struct {
 	Longitude float64 `json:"longitude"`
 }
 
+type GoogleSheetStruct struct{
+	Id string `json:"id"`
+}
+
 func (d *AddDeliveryRequestWithGeoCode) ValidateAddDelivery() error {
 	validate := validator.New()
 	return validate.Struct(d)
