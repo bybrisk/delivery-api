@@ -49,3 +49,8 @@ func (d *DeleteAllDeliveryPostSuccess) DeleteAllDeliveryPostSuccessToJSON (w io.
 	e := json.NewEncoder(w)
 	return e.Encode(d)
 }
+
+func (d *GoogleSpreadSheetMetaStruct) GoogleSpreadSheetMetaStructToJSON (w io.Writer) error {
+	e := json.NewEncoder(w)
+	return e.Encode(d)
+}

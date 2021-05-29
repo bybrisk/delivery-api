@@ -89,7 +89,7 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 
 }
 
-func CreateGoogleSheetAPI (docID string, r *http.Request) {
+func CreateGoogleSheetAPI (docID string, r *http.Request) (string,string){
 
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:8080/delivery/create/callback",
@@ -127,6 +127,9 @@ func CreateGoogleSheetAPI (docID string, r *http.Request) {
 	//create google sheet
 	rb := &sheets.Spreadsheet{
 		// TODO: Add desired fields of the request body.
+		Properties: &sheets.SpreadsheetProperties{
+			Title: "Bybrisk Intelligence Customer Data",
+		},
 	}
 
 	resp, err := srv.Spreadsheets.Create(rb).Context(ctx).Do()
@@ -135,8 +138,8 @@ func CreateGoogleSheetAPI (docID string, r *http.Request) {
 	}
 
 	// TODO: Change code below to process the `resp` object:
-	fmt.Printf("%#v\n", resp)
-	fmt.Println("resp = ", reflect.TypeOf(resp))
+	fmt.Printf("%#v\n", resp.SpreadsheetId)
+	return resp.SpreadsheetId, resp.SpreadsheetUrl 
 
 }
 

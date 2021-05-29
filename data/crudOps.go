@@ -311,6 +311,16 @@ func PrintGoogleSheetCrudOps (businessID string, r *http.Request) {
 	PrintOrderToShareGoogleAPI(businessID,r)
 }
 
-func CreateGoogleSheetCrudOps (businessID string, r *http.Request) {
-	CreateGoogleSheetAPI(businessID,r)
+func CreateGoogleSheetCrudOps (businessID string, r *http.Request) *GoogleSpreadSheetMetaStruct {
+	var response GoogleSpreadSheetMetaStruct
+	sheetID, sheetLink := CreateGoogleSheetAPI(businessID,r)
+	_=SaveSheetIdToMongo(businessID, sheetID, sheetLink)
+	response = GoogleSpreadSheetMetaStruct{
+		SpreadsheetId: sheetID,
+		SpreadsheetUrl: sheetLink,
+		Message: "Successfully created google sheet!",
+		Status: 200, 
+	}
+
+	return &response
 }

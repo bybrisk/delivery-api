@@ -27,10 +27,10 @@ func (p *Delivery) CreateGoogleSheetCallback (w http.ResponseWriter, r *http.Req
 
 	json.Unmarshal(sDec, &request)
 
-	data.CreateGoogleSheetCrudOps(request.Id,r)
+	lp := data.CreateGoogleSheetCrudOps(request.Id,r)
 
-	/*err := lp.GetAllDeliveryResultToJSON(w)
+	err := lp.GoogleSpreadSheetMetaStructToJSON(w)
 	if err!=nil {
 		http.Error(w,"Data failed to marshel",http.StatusInternalServerError)		
-	}*/
+	}
 }

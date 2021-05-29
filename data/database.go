@@ -231,3 +231,16 @@ func DeleteDeliveryFromMongo(docID string)int64{
 	}
 	return updateResult.ModifiedCount
 }
+
+func SaveSheetIdToMongo(docID string, sheetID string, link string) int64{
+	
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	filter := bson.M{"_id": id}
+	updateResult, err := collectionName.UpdateOne(shashankMongo.CtxForDB, filter, bson.M{"$set":bson.M{"sheetID": sheetID, "sheetLink":link}})
+	if err != nil {
+		log.Error("SaveSheetIdToMongo ERROR:")
+		log.Error(err)
+	}
+	return updateResult.ModifiedCount
+}

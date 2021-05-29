@@ -416,6 +416,13 @@ type GoogleSheetStructDir struct{
 	Id string `json:"id"`
 }
 
+type GoogleSpreadSheetMetaStruct struct{
+	SpreadsheetId string `json:"spreadsheetId"`
+	SpreadsheetUrl string `json:"spreadsheetUrl"`
+    Message string `json:"message"`
+	Status int64 `json:"status"`
+}
+
 func (d *AddDeliveryRequestWithGeoCode) ValidateAddDelivery() error {
 	validate := validator.New()
 	return validate.Struct(d)
