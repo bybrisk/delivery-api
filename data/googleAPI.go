@@ -9,7 +9,6 @@ import (
     "google.golang.org/api/sheets/v4"
 
 	"context"
-	"reflect"
     "fmt"
     "io/ioutil"
     "net/http"
@@ -31,7 +30,7 @@ var (
 	}
 }*/
 
-func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
+func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) {
 
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:8080/delivery/callback",
@@ -71,21 +70,26 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 	//Get the data from elasticSearch
 
 	dataFromES := FetchAllDeliveryES("BybID",docID)
+	sheetId,sheetLink := GetSheetIdAndURLMongo(docID)
 
-    spreadsheetId := "1yVLpi-mMKD5GQpzgayHaQqQqD6Qx9xXnb3vf-kU0h-c"
     writeRange := "Sheet1!A2"
     
 	var vr sheets.ValueRange
-	
+
+	firstVal := []interface{}{"Order ID","CustomerName","Address","Phone","Note","ItemWeight","Payment Status","Latitude","Longitude"}
+	vr.Values = append(vr.Values, firstVal)
+
 	for _,v := range dataFromES.Hits.Hits{
 		myval := []interface{}{v.ID, v.Source.CustomerName, v.Source.CustomerAddress, v.Source.Phone, v.Source.Note, v.Source.ItemWeight, v.Source.PaymentStatus, v.Source.Latitude, v.Source.Longitude}
 		vr.Values = append(vr.Values, myval)
 	}
 
-    _, err = srv.Spreadsheets.Values.Update(spreadsheetId, writeRange, &vr).ValueInputOption("RAW").Do()
+    _, err = srv.Spreadsheets.Values.Update(sheetId, writeRange, &vr).ValueInputOption("RAW").Do()
     if err != nil {
         log.Fatalf("Unable to retrieve data from sheet. %v", err)
     }
+
+	return sheetId,sheetLink
 
 }
 
@@ -138,7 +142,6 @@ func CreateGoogleSheetAPI (docID string, r *http.Request) (string,string){
 	}
 
 	// TODO: Change code below to process the `resp` object:
-	fmt.Printf("%#v\n", resp.SpreadsheetId)
 	return resp.SpreadsheetId, resp.SpreadsheetUrl 
 
 }
@@ -152,7 +155,6 @@ func GetUserInfo(code string) ([]byte, *oauth2.Token, error) {
 	if err != nil {
 		return nil, nil ,fmt.Errorf("code exchange failed: %s", err.Error())
 	}
-	fmt.Println("token = ", reflect.TypeOf(token))
 
 	response, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
 	if err != nil {

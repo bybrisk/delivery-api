@@ -244,3 +244,23 @@ func SaveSheetIdToMongo(docID string, sheetID string, link string) int64{
 	}
 	return updateResult.ModifiedCount
 }
+
+func GetSheetIdAndURLMongo(docID string) (string,string){
+	collectionName := shashankMongo.DatabaseName.Collection("businessAccounts")
+	id, _ := primitive.ObjectIDFromHex(docID)
+	filter := bson.M{"_id": id}
+
+	type SheetIdAndLinkStruct struct{
+		sheetID string `json:"sheetID"`
+		SheetLink string `json:"sheetLink"`
+	}
+
+	var document SheetIdAndLinkStruct
+
+	err:= collectionName.FindOne(shashankMongo.CtxForDB, filter).Decode(&document)
+	if err != nil {
+		log.Error("GetGeocodes ERROR:")
+		log.Error(err)
+	}
+	return document.sheetID, document.SheetLink
+}

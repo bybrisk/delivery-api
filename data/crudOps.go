@@ -307,8 +307,20 @@ func DeletePendingDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
 	return &response
 } 
 
-func PrintGoogleSheetCrudOps (businessID string, r *http.Request) {
-	PrintOrderToShareGoogleAPI(businessID,r)
+func PrintGoogleSheetCrudOps (businessID string, r *http.Request) *GoogleSpreadSheetMetaStruct {
+	var response GoogleSpreadSheetMetaStruct
+	
+	sheetID, sheetLink := PrintOrderToShareGoogleAPI(businessID,r)
+	
+	response = GoogleSpreadSheetMetaStruct{
+		SpreadsheetId: sheetID,
+		SpreadsheetUrl: sheetLink,
+		Message: "Successfully updated google sheet!",
+		Status: 200, 
+	}
+	
+	return &response
+
 }
 
 func CreateGoogleSheetCrudOps (businessID string, r *http.Request) *GoogleSpreadSheetMetaStruct {
