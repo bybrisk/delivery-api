@@ -50,19 +50,22 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) 
 	// If modifying these scopes, delete your previously saved token.json.
 	b, err := ioutil.ReadFile("credentials.json")
         if err != nil {
-                log.Fatalf("Unable to read client secret file: %v", err)
+				log.Error("Unable to read client secret file: ")
+				log.Error(err)
         }
 
 	config, err := google.ConfigFromJSON(b, "https://www.googleapis.com/auth/spreadsheets")
 	if err != nil {
-			log.Fatalf("Unable to parse client secret file to config: %v", err)
+			log.Error("Unable to parse client secret file to config: ")
+			log.Error(err)
 	}
 	client := GetClient(config, token)
 
 	//Google sheet code starts from here
 	srv, err := sheets.NewService(ctx, option.WithHTTPClient(client))
     if err != nil {
-            log.Fatalf("Unable to retrieve Sheets client: %v", err)
+			log.Error("Unable to retrieve Sheets client:")
+			log.Error(err)
     }
 
     // Prints the names and majors of students in a sample spreadsheet:
@@ -71,6 +74,8 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) 
 
 	dataFromES := FetchAllDeliveryES("BybID",docID)
 	sheetId,sheetLink := GetSheetIdAndURLMongo(docID)
+	
+	fmt.Println(sheetId)
 
     writeRange := "Sheet1!A2"
     
@@ -86,7 +91,8 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) 
 
     _, err = srv.Spreadsheets.Values.Update(sheetId, writeRange, &vr).ValueInputOption("RAW").Do()
     if err != nil {
-        log.Fatalf("Unable to retrieve data from sheet. %v", err)
+		log.Error("Unable to retrieve data from sheet:")
+		log.Error(err)
     }
 
 	return sheetId,sheetLink
@@ -113,19 +119,22 @@ func CreateGoogleSheetAPI (docID string, r *http.Request) (string,string){
 	// If modifying these scopes, delete your previously saved token.json.
 	b, err := ioutil.ReadFile("credentials.json")
         if err != nil {
-                log.Fatalf("Unable to read client secret file: %v", err)
+				log.Error("Unable to read client secret file:")
+				log.Error(err)
         }
 
 	config, err := google.ConfigFromJSON(b, "https://www.googleapis.com/auth/spreadsheets")
 	if err != nil {
-			log.Fatalf("Unable to parse client secret file to config: %v", err)
+			log.Error("Unable to parse client secret file to config:")
+			log.Error(err)
 	}
 	client := GetClient(config, token)
 
 	//Google sheet code starts from here
 	srv, err := sheets.NewService(ctx, option.WithHTTPClient(client))
     if err != nil {
-            log.Fatalf("Unable to retrieve Sheets client: %v", err)
+			log.Error("Unable to retrieve Sheets client:")
+			log.Error(err)
     }
 
 	//create google sheet
@@ -138,7 +147,8 @@ func CreateGoogleSheetAPI (docID string, r *http.Request) (string,string){
 
 	resp, err := srv.Spreadsheets.Create(rb).Context(ctx).Do()
 	if err != nil {
-			log.Fatal(err)
+			log.Error("Unable to retrieve Sheets data:")
+			log.Error(err)
 	}
 
 	// TODO: Change code below to process the `resp` object:
