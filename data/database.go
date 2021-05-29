@@ -251,7 +251,7 @@ func GetSheetIdAndURLMongo(docID string) (string,string){
 	filter := bson.M{"_id": id}
 
 	type SheetIdAndLinkStruct struct{
-		sheetID string `json:"sheetID"`
+		SheetID string `json:"sheetID"`
 		SheetLink string `json:"sheetLink"`
 	}
 
@@ -262,5 +262,5 @@ func GetSheetIdAndURLMongo(docID string) (string,string){
 		log.Error("GetGeocodes ERROR:")
 		log.Error(err)
 	}
-	return document.sheetID, document.SheetLink
+	return document.SheetID, document.SheetLink
 }
