@@ -12,7 +12,7 @@ import (
 // Print all orders of business to google sheets callback function.
 //
 // responses:
-//	200: printOrderResponse
+//	200: googleSheetResponse
 //  422: errorValidation
 //  501: errorResponse
 

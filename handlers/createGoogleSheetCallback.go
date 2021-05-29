@@ -12,7 +12,7 @@ import (
 // Create google sheets callback function.
 //
 // responses:
-//	200: createGoogleSheetResponse
+//	200: googleSheetResponse
 //  422: errorValidation
 //  501: errorResponse
 

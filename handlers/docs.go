@@ -92,6 +92,14 @@ type deliveryGetAllResponseWrapper struct {
 	Body data.DeliveryResponseBulk
 }
 
+// Response after google sheet operation
+// swagger:response googleSheetResponse
+type googleSheetResponseWrapper struct {
+	// Response from google sheet operation
+	// in: body
+	Body data.GoogleSpreadSheetMetaStruct
+}
+
 // swagger:parameters updateDeliveryStatus
 type updateDeliveryStatusWrapper struct {
 	// Data structure to Update Delivery Status.
