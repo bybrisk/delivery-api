@@ -21,7 +21,7 @@ var (
 	oauthStateString = "pseudo-random"
 )
 
-func init() {
+/*func init() {
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:8080/delivery/callback",
 		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
@@ -29,9 +29,18 @@ func init() {
 		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
 		Endpoint:     google.Endpoint,
 	}
-}
+}*/
 
 func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
+
+	googleOauthConfig = &oauth2.Config{
+		RedirectURL:  "http://localhost:8080/delivery/callback",
+		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
+		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
+		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
+		Endpoint:     google.Endpoint,
+	}
+
 	ctx := context.Background()
 	_, token, err := GetUserInfo(r.FormValue("code"))
 	if err != nil {
@@ -81,6 +90,15 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 }
 
 func CreateGoogleSheetAPI (docID string, r *http.Request) {
+
+	googleOauthConfig = &oauth2.Config{
+		RedirectURL:  "http://localhost:8080/delivery/create/callback",
+		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
+		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
+		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
+		Endpoint:     google.Endpoint,
+	}
+
 	ctx := context.Background()
 	_, token, err := GetUserInfo(r.FormValue("code"))
 	if err != nil {
