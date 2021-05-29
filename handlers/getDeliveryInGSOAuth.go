@@ -19,6 +19,15 @@ import (
 //  501: errorResponse
 
 func (p *Delivery) PrintOrdersToSheetOAuth (w http.ResponseWriter, r *http.Request) {
+	
+	googleOauthConfig = &oauth2.Config{
+		RedirectURL:  "https://developers.bybrisk.com/delivery/callback",
+		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
+		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
+		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
+		Endpoint:     google.Endpoint,
+	}
+
 	p.l.Println("Handle GET request -> delivery-api Module")
 
 	vars := mux.Vars(r)
@@ -39,13 +48,3 @@ func (p *Delivery) PrintOrdersToSheetOAuth (w http.ResponseWriter, r *http.Reque
 var (
 	googleOauthConfig *oauth2.Config
 )
-
-func init() {
-	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "https://developers.bybrisk.com/delivery/callback",
-		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
-		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
-		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
-		Endpoint:     google.Endpoint,
-	}
-}
