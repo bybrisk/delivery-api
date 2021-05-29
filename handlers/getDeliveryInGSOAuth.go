@@ -42,7 +42,7 @@ var (
 
 func init() {
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/delivery/callback",
+		RedirectURL:  "https://developers.bybrisk.com/delivery/callback",
 		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
 		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
 		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},

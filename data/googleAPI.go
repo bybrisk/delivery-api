@@ -33,7 +33,7 @@ var (
 func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) {
 
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/delivery/callback",
+		RedirectURL:  "https://developers.bybrisk.com/delivery/callback",
 		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
 		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
 		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
@@ -77,7 +77,7 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) 
 	
 	fmt.Println(sheetId)
 
-    writeRange := "Sheet1!A2"
+    writeRange := "Sheet1!A1"
     
 	var vr sheets.ValueRange
 
@@ -102,7 +102,7 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) (string, string) 
 func CreateGoogleSheetAPI (docID string, r *http.Request) (string,string){
 
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/delivery/create/callback",
+		RedirectURL:  "https://developers.bybrisk.com/delivery/create/callback",
 		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
 		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
 		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},

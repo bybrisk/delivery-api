@@ -257,7 +257,7 @@ func FetchAllDeliveryES(key string,docID string) DeliveryResponseBulk {
 
 	 responseBody := bytes.NewBufferString(postBody)
   	//Leverage Go's HTTP Post function to make request
-	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=1000", "application/json", responseBody)
+	 resp, err := http.Post(urlAuthenticate+"/_all/_search?size=5000", "application/json", responseBody)
   
 	 //Handle Error
 	 if err != nil {
