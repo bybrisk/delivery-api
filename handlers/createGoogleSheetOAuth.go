@@ -4,7 +4,10 @@ package handlers
 import (
 	"net/http"
 	"github.com/gorilla/mux"
+	//"github.com/bybrisk/delivery-api/data"
+	"golang.org/x/oauth2"
 	"encoding/base64"
+	//"fmt"
 )
 
 // swagger:route GET /delivery/print/create/{businessID} delivery createGoogleSheet
@@ -15,6 +18,11 @@ import (
 //  501: errorResponse
 
 func (p *Delivery) CreateGoogleSheetOAuth (w http.ResponseWriter, r *http.Request) {
+
+	googleOauthConfig = &oauth2.Config{
+		RedirectURL:  "http://localhost:8080/delivery/create/callback",
+	}
+
 	p.l.Println("Handle GET request -> delivery-api Module")
 
 	vars := mux.Vars(r)
