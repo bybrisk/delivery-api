@@ -310,3 +310,7 @@ func DeletePendingDeliveryByBybID(docID string) *DeleteAllDeliveryPostSuccess{
 func PrintGoogleSheetCrudOps (businessID string, r *http.Request) {
 	PrintOrderToShareGoogleAPI(businessID,r)
 }
+
+func CreateGoogleSheetCrudOps (businessID string, r *http.Request) {
+	CreateGoogleSheetAPI(businessID,r)
+}

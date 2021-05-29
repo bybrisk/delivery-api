@@ -80,6 +80,48 @@ func PrintOrderToShareGoogleAPI(docID string, r *http.Request) {
 
 }
 
+func CreateGoogleSheetAPI (docID string, r *http.Request) {
+	ctx := context.Background()
+	_, token, err := GetUserInfo(r.FormValue("code"))
+	if err != nil {
+		log.Error("CreateGoogleSheetAPI ERROR:")
+		log.Error(err)
+	}
+
+	// If modifying these scopes, delete your previously saved token.json.
+	b, err := ioutil.ReadFile("credentials.json")
+        if err != nil {
+                log.Fatalf("Unable to read client secret file: %v", err)
+        }
+
+	config, err := google.ConfigFromJSON(b, "https://www.googleapis.com/auth/spreadsheets")
+	if err != nil {
+			log.Fatalf("Unable to parse client secret file to config: %v", err)
+	}
+	client := GetClient(config, token)
+
+	//Google sheet code starts from here
+	srv, err := sheets.NewService(ctx, option.WithHTTPClient(client))
+    if err != nil {
+            log.Fatalf("Unable to retrieve Sheets client: %v", err)
+    }
+
+	//create google sheet
+	rb := &sheets.Spreadsheet{
+		// TODO: Add desired fields of the request body.
+	}
+
+	resp, err := srv.Spreadsheets.Create(rb).Context(ctx).Do()
+	if err != nil {
+			log.Fatal(err)
+	}
+
+	// TODO: Change code below to process the `resp` object:
+	fmt.Printf("%#v\n", resp)
+	fmt.Println("resp = ", reflect.TypeOf(resp))
+
+}
+
 func GetUserInfo(code string) ([]byte, *oauth2.Token, error) {
 	/*if state != oauthStateString {
 		return nil, nil, fmt.Errorf("invalid oauth state")

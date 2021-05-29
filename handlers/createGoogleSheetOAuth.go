@@ -11,14 +11,14 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
-// swagger:route GET /delivery/print/{businessID} delivery printOrdersToSheet
-// Google oauth consent screen to print data to google sheet.
+// swagger:route GET /delivery/print/create/{businessID} delivery createGoogleSheet
+// Google oauth consent screen to create a google sheet.
 //
 // responses:
 //  422: errorValidation
 //  501: errorResponse
 
-func (p *Delivery) PrintOrdersToSheetOAuth (w http.ResponseWriter, r *http.Request) {
+func (p *Delivery) CreateGoogleSheetOAuth (w http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle GET request -> delivery-api Module")
 
 	vars := mux.Vars(r)
@@ -42,7 +42,7 @@ var (
 
 func init() {
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/delivery/callback",
+		RedirectURL:  "http://localhost:8080/delivery/create/callback",
 		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
 		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
 		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
