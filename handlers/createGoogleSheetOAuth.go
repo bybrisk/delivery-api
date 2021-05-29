@@ -4,11 +4,7 @@ package handlers
 import (
 	"net/http"
 	"github.com/gorilla/mux"
-	//"github.com/bybrisk/delivery-api/data"
-	"golang.org/x/oauth2"
 	"encoding/base64"
-	//"fmt"
-	"golang.org/x/oauth2/google"
 )
 
 // swagger:route GET /delivery/print/create/{businessID} delivery createGoogleSheet
@@ -34,18 +30,4 @@ func (p *Delivery) CreateGoogleSheetOAuth (w http.ResponseWriter, r *http.Reques
 
 	url := googleOauthConfig.AuthCodeURL(oauthStateString)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
-}
-
-var (
-	googleOauthConfig *oauth2.Config
-)
-
-func init() {
-	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/delivery/create/callback",
-		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
-		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
-		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
-		Endpoint:     google.Endpoint,
-	}
 }
