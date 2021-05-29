@@ -7,6 +7,7 @@ import (
 	//"github.com/bybrisk/delivery-api/data"
 	"golang.org/x/oauth2"
 	"encoding/base64"
+	"golang.org/x/oauth2/google"
 	//"fmt"
 )
 
@@ -21,6 +22,10 @@ func (p *Delivery) CreateGoogleSheetOAuth (w http.ResponseWriter, r *http.Reques
 
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  "http://localhost:8080/delivery/create/callback",
+		ClientID:     "113188653176-fjoovrjckjns6hk9p9nunnp3677omhb3.apps.googleusercontent.com",
+		ClientSecret: "C2b3yeljmmSW-rn5WEGJ17kl",
+		Scopes:       []string{"https://www.googleapis.com/auth/spreadsheets"},
+		Endpoint:     google.Endpoint,
 	}
 
 	p.l.Println("Handle GET request -> delivery-api Module")
